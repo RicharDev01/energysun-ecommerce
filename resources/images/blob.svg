@@ -1,0 +1,11 @@
+
+<svg viewBox="-30 -30 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="myGradient" gradientTransform="rotate(90)">
+      <stop offset="0%" stop-color="#9EF37A" />
+      <stop offset="50%" stop-color="#4CB36D" />
+      <stop offset="100%" stop-color="#265668" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#myGradient)" d="M34.7,-24.9C45.6,-14,55.5,0.5,54.6,15.7C53.7,30.9,42,46.8,24.4,58.2C6.8,69.5,-16.6,76.3,-30.8,67.9C-45,59.6,-50,36.1,-51.6,15.6C-53.3,-4.9,-51.6,-22.3,-42.4,-32.9C-33.3,-43.4,-16.6,-47,-2.4,-45.1C11.9,-43.2,23.8,-35.8,34.7,-24.9Z" transform="translate(100 100)" />
+</svg>

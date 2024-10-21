@@ -1,0 +1,23 @@
+.message-alert{
+  display: flex;
+  /* justify-content: space-between; */
+
+  border: .2rem solid var(--color-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem 0;
+
+  background-color: var(--color-bg-accent);
+}
+.message-content{ margin-left: 2rem; }
+
+
+.alert-error {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.alert-warning {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}

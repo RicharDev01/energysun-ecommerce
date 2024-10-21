@@ -1,0 +1,24 @@
+
+.not_found_page {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.not__title {
+  font-family: var(--oxanium-b) ;
+  font-size: 6rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.not__content {
+  font-family: var(--oxanium-b);
+  font-size: 3rem;
+  margin: 2rem 0;
+}
+
+.not__image {
+  display: block;
+  margin: 2rem auto;
+  width: 70rem;
+}

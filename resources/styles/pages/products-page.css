@@ -1,0 +1,117 @@
+
+.banner-publicitario{
+  background-color: var(--color-info);
+  height: 30rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.banner__content{ width: 50rem; }
+.banner__content h3{
+  font-family: var(--oxanium-b);
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.banner__image{
+  position: relative; /* Necesario para posicionar el pseudo-elemento */
+  width: 35rem;
+  /* background-image: url("../../images/logo-energysun-blanco.png");
+  background-size: cover;
+  background-repeat: no-repeat; */
+}
+.banner__image::before{
+  content: ''; /* Crear el pseudo-elemento */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image: url('../../images/logo-energysun-blanco.png'); /* Fondo con la imagen */
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.5; /* La opacidad aplicada solo al background */
+  z-index: 1; /* Colocar el pseudo-elemento por detrás de la imagen */
+}
+
+.banner__image .person{
+
+  display: inline-block;
+  position: relative;
+
+  z-index: 2; /* Asegurar que la imagen esté por encima */
+
+  width: 100%;
+
+  object-fit: cover;
+  object-position: center 7rem;
+}
+
+
+/* seccion de los filtros */
+.filters{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 6rem;
+  margin: 3rem 0;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+
+  background-color: var(--color-bg-accent);
+}
+
+.filters__options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sortby__input{
+  padding: 1rem;
+  border: 0.1rem solid var(--color-info);
+  border-radius: 1rem;
+}
+
+.titulo-busqueda {
+  margin: 2rem 0;
+  font-family: var(--oxanium-b);
+  font-size: 2.5rem;
+}
+
+/* seccion de los productos */
+.products-list{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+  row-gap: 3rem;
+  margin-bottom: 3rem;
+  justify-items: center;
+}
+
+
+/* ++++ MEDIA QUERIES ++++ */
+@media screen and (min-width: 700px) {
+  .products-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .products-list{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .products-list{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,30 @@
+@import "./fonts.css"; /* IMPORT DE LAS FUENTES */
+@import "./config.css"; /* CONFIGURACIONES INICIALES */
+
+/* COMPONENTES GENERICOS QUE SE USARAN EN TODA LA APLICACION */
+@import "./components/buttons.css";
+@import "./components/inputs.css";
+@import "./components/menu.css";
+@import "./components/card.css";
+@import "./components/messages.css";
+
+@import "./header.css"; 
+@import "./footer.css"; /* PIE DE PAGINA */
+
+/* ESTILOS DISTINTOS COMPONENTES DEL APLICATIVO */
+@import "./pages/landing-page.css"; /* LANDING PAGE */
+@import "./pages/not_found.css"; /* NOT FOUND PAGE */
+@import "./pages/server_error.css"; /* SERVER ERROR PAGE */
+@import "./pages/products-page.css"; /* PRODUCTs LIST PAGE */
+@import "./pages/single-product.css"; /* PRODUCT PAGE */
+@import "./pages/service-page.css"; /* SERVICES PAGE */
+@import "./pages/appointment-page.css"; /* APPOINTMENT PAGE */
+@import "./pages/login-page.css"; /* LOGIN PAGE */
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+:root {
+  --color-primary: #4CB36D ;
+  --color-secundary: #9EF37A ;
+  --color-bg: #17343F ;
+  --color-bg-accent: #265668 ;
+  --color-light: #FFFFFF;
+
+  /* COLORES DE ALERTAS, VALIDACIONES Y MENSAJES INFORMATIVOS */
+  --color-error: #e84118;
+  --color-warning: #e1b12c;
+  --color-info: #0097e6;
+  --color-success: var(--color-secundary) ;
+
+  /* Gradientes */
+  --l-gradient-green: linear-gradient(90deg, var(--color-bg-accent) 0, 
+                          var(--color-primary) 55%,
+                          var(--color-secundary) 100%);
+    /* Gradientes */
+  --l-gradient-button:  
+              linear-gradient(
+                90deg, 
+                var(--color-info), var(--color-secundary),
+                var(--color-primary), var(--color-secundary)  );
+
+  /* valor de fuentes */
+  --roboto-b: "Roboto-bold", sans-serif;
+  --oxanium-b: "Oxanium-bold", sans-serif;
+  --roboto-r: "Roboto-regular", sans-serif;
+  --oxanium-r: "Oxanium-regular", sans-serif;
+
+  --height-header: 7rem;
+}
+
+::selection {
+  background-color: var(--color-secundary);
+  color: var(--color-bg);
+}
+
+::-webkit-scrollbar {
+  width: .8rem;
+  background-color: var(--color-bg-accent);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: var(--color-primary);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: var(--roboto-r);
+  scroll-behavior: smooth;
+}
+
+body { 
+  font-size: 1.6rem ;
+  background-color: var(--color-bg);
+  color: var(--color-light);
+}
+
+a {
+  color: var(--color-secundary);
+  text-decoration: none;
+}
+
+p{ line-height: 1.5 }
+
+
+/* GENERALES */
+.container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.text-mark {
+  position: relative;
+  display: inline-block;
+
+  /* border-radius: .5rem;
+  padding: 0 0.3rem; */
+
+  font-family: inherit;
+  font-weight: inherit;
+
+  background-color:  var(--color-secundary);
+  color: transparent;
+  background-clip: text;
+}
+.text-mark::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: .2rem;
+  
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: var(--l-gradient-green) ;
+}
+
+
+ /*? **** MEDIA QUERY'S PARA MENU **** */
+
+ /* ENFOQUE MOBILE FIRST */
+
+ /* MD */
+@media screen and (min-width: 1024px) {
+  
+  .container { 
+    width: 85%;
+    max-width: 1200px;
+  } 
+  
+}
+
+/* LG */
+@media screen and (min-width: 1200px) {
+
+
+}

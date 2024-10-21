@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Oxanium-bold";
+  /* src: url("../fonts/Oxanium/Oxanium-Bold.ttf"); */
+  src: url("../fonts/Oxanium/Oxanium-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Oxanium-regular";
+  src: url("../fonts/Oxanium/Oxanium-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Roboto-bold";
+  src: url("../fonts/Roboto/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Roboto-regular";
+  src: url("../fonts/Roboto/Roboto-Regular.ttf");
+  font-weight: normal;
+}

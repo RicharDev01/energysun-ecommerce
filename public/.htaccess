@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+
+# Activar rewrite
+RewriteEngine on
+
+# Manejo de errores personalizados
+# ErrorDocument 404 http://localhost/EnergySun/Errors/Error/not_found
+# ErrorDocument 503 http://localhost/EnergySun/Errors/Error/server_error
+ErrorDocument 404 http://energysun.com/Errors/Error/not_found
+ErrorDocument 500 http://energysun.com/Errors/Error/server_error
+
+# Ignorar directorios y archivos existentes
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# Reescribir URL limpia con módulo, controlador y acción
+# RewriteRule ^([^/]+)/([^/]+)/([^/]+)$ index.php?module=$1&controller=$2&action=$3 [L,QSA]
+
+# Reescribir URL con módulo, controlador, acción y parámetro variable (código, id, nombre, etc.)
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)/?([^/]+)?$ index.php?module=$1&controller=$2&action=$3&param=$4 [L,QSA]
+
+
+</IfModule>
+
+# PARA DARLE PERMISOS DE CORS
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>

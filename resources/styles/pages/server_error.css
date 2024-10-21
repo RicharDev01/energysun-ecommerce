@@ -1,0 +1,24 @@
+
+.server_error_page {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.server__title {
+  font-family: var(--oxanium-b) ;
+  font-size: 6rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.server__content {
+  font-family: var(--oxanium-b);
+  font-size: 3rem;
+  margin: 3rem 0;
+}
+
+.server__image {
+  display: block;
+  margin: 0 auto;
+  width: 70rem;
+}

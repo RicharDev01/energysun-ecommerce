@@ -1,0 +1,125 @@
+
+/* ESTILOS GENERALES */
+.card{
+  display: grid;
+  min-width: 25rem;
+  max-width: 30rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1.5rem 2rem -1rem rgb(0 0 0 / 80%);
+  background-color:var(--color-bg-accent);
+}
+
+/* CABECERA DEL CARD (IMAGEN) */
+.card__header{
+  position: relative;
+  height: 25rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.card__image{
+  display: inline-block;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+/* viñetas personalizadas */
+.card__vignettes{
+  position: absolute;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: auto;
+
+  font-size: 1.2rem;
+  font-family: var(--roboto-b), sans-serif;
+  color: var(--color-bg);
+
+  background-image: linear-gradient( var(--color-bg)  0, transparent 100%);
+}
+
+.vignette__new, .vignette__off {
+  position: relative;
+  top: 0;
+  z-index: 1;
+  
+  display: grid;
+  place-items: center;
+
+  height: 5rem;
+  width: 5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+
+  text-transform: uppercase;
+
+}
+
+.vignette__new::before, .vignette__off::before{
+  content: '';
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 0.5rem;
+
+  transform: translate(-50%, 9%) rotate(45deg);
+}
+.vignette__new, 
+.vignette__new::before{ background-color: var(--color-secundary) }
+
+.vignette__off, 
+.vignette__off::before{
+  background-color: var(--color-info);
+  color: var(--color-light);
+}
+
+/* cuerpo de la card (titulo) */
+.card__title {
+  font-family: var(--oxanium-b), sans-serif;
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+.card__description {
+  font-family: var(--roboto-r), sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+/* PIE DE LA CARD (BUTTON) */
+.card__footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__price {
+  font-family: var(--oxanium-b), sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.2rem;
+}
+
+/* SOBREESCRIBIRE USANDO NUEVA CLASE AL ARCHIVO buttons.css */
+.card__button {
+  border-radius: 2rem;
+  background-image: var(--l-gradient-button);
+  transition: background-position 500ms ease-out;
+  background-size: 300%;
+  margin-bottom: 0; 
+  background-position:left; 
+}
+
+.card__button:hover {
+  background-position:right; 
+}
+

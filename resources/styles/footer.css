@@ -1,0 +1,146 @@
+
+/* FOOTER */
+.footer{
+  position: relative;
+  
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 20rem;
+  width: 100%;
+  padding: 1rem;
+  
+  font-size: 1.4rem;
+  
+  background-color: var(--color-bg-accent);
+
+}
+
+.footer__social {
+  text-align: center;
+  width: 50%;
+}
+
+.social__title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.social__icons {
+  display: flex;
+  justify-content: space-between;
+}
+.social__icons img { height: 2.2rem; }
+
+
+.footer__copy{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  /* margin-left: 2rem; */
+
+  position: static;
+  transform: translateY(0);
+  order: 2;
+
+  /* @include rwd(medium) {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 95%;
+    margin-left: 0;
+
+  }
+ */
+
+}
+
+
+.footer__copy .copy {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  margin-top: 1rem;
+}
+
+.footer__slogan {
+  font-family: var(--oxanium-b);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: .4rem;
+  color: var(--color-secundary);
+}
+
+.footer__menu { 
+  display: flex;
+  display: none;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+
+
+  .footer__link { color: var(--color-light); margin-right: 5px; }
+  .footer__link:hover { color: var(--color-secundary) }
+
+}
+
+
+.footer__contact{
+  text-align: right;
+  order: 1;
+  margin: 4rem 0;
+  font-size: 1.6rem;
+  /* border: 1px solid red; */
+
+}
+
+.contact__link {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--color-light);
+}
+
+.contact__icon {
+   width: 1.8rem; 
+   margin-left: 12px;
+}
+
+/*? **** MEDIA QUERY'S PARA MENU **** */
+
+ /* ENFOQUE MOBILE FIRST */
+
+ /* MD */
+ @media screen and (min-width: 1024px) {
+  
+  /* FOOTER */
+  .footer {
+    flex-direction: row;
+    box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+    min-height: 20rem;
+    width: 100%
+  }
+  .footer__social { width: 25rem }
+
+  .footer__menu { display: flex }
+
+  .footer__copy {
+    order:2;
+    width: 50%;
+    margin-left: 1rem;
+  }
+
+  .footer__contact { order: 3 }
+  
+}
+
+/* LG */
+@media screen and (min-width: 1200px) {
+
+
+}

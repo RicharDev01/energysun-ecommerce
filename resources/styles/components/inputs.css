@@ -1,0 +1,74 @@
+input[type="date"],
+input[type="time"],
+input[type="month"],
+input[type="datetime-local"] {
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+}
+input[type=date]::-webkit-calendar-picker-indicator,
+input[type=time]::-webkit-calendar-picker-indicator,
+input[type=month]::-webkit-calendar-picker-indicator,
+input[type=datetime-local]::-webkit-calendar-picker-indicator {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: 0 0;
+  color: transparent;
+  opacity: 0;
+  pointer-events: auto;
+}
+input[type=number]::-webkit-inner-spin-button { display: none; }
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+  max-width: 32rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: var(--color-bg-accent);
+}
+
+.form__label {
+  font-family: var(--oxanium-r);
+  font-size: 1.5rem;
+}
+
+.form__input, 
+.form__textarea {
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+  margin: 0.8rem 0;
+
+  color: var(--color-light);
+  background-color: var(--color-bg);
+}
+
+.form__input:focus, 
+.form__textarea:focus {
+  box-shadow: 0 0 0 0.1rem var(--color-secundary),
+  0 0 1rem 0 var(--color-secundary);
+} 
+
+.form__textarea {
+  width: 100%;
+  resize: none;
+  field-sizing: content; /* SIN Compatibilidad completa */
+}
+
+.form__group { }
+
+.form__button {
+  width: 100%;
+}
