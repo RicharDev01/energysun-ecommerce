@@ -25,13 +25,13 @@
 
 <section class="container-fluid h-100">
 
-   <div class="row  h-100">
-       
-       <aside class="col-2 bg-primary">Barra lateral</aside>
-       
-       <main class="col-10 container bg-secondary">
+   <div class="row h-100">
 
-           <h1> Bienvenido a tu panel admnistrativo </h1>
+        <?php require_once __DIR__ . '/layouts/sidebar.php'; ?>
+
+       <main class="col-10 container">
+
+           <h1> Bienvenido a tu panel admnistrativo /dashboard </h1>
 
        </main>
        

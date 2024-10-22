@@ -1,4 +1,24 @@
 
+:root {
+    --color-dark-green: #17343F ;
+    --color-dark-accent: #265668 ;
+    --color-green-accent: #9EF37A ;
+}
 body {
     height: calc( 100vh - 56px ) ;
 }
+
+.bg-green-dark {
+    background-color: var(--color-dark-green);
+    color: white;
+}
+
+.bg-dark-accent {
+    background-color: var(--color-dark-accent) !important;
+    color: white !important;
+}
+
+.bg-green-accent {
+    background-color: var(--color-green-accent);
+}
+

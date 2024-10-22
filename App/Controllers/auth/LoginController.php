@@ -66,16 +66,13 @@ class LoginController
 					
           if ($identity->getRol()->getNombre() == 'ADMINISTRADOR') {
             $_SESSION['ADMINISTRADOR'] = true;
-//            require_once __DIR__ . '/../../../resources/views/dashboard/vw_dashboard.php';
 	          header( "Location: " . Parameters::BASE_URL . "/dashboard/inicio/vista");
 						exit;
 						
           } elseif( $identity->getRol()->getNombre() == 'CLIENTE' ) {
-						// http://energysun.com/productos/producto/lista
 	          $_SESSION['CLIENTE'] = true;
 	          header( "Location: " . Parameters::BASE_URL . "/productos/producto/lista");
 						exit;
-//            require_once __DIR__ . '/../../../resources/views/productos/vw_lista_productos.php';
           }
           break;
         default:

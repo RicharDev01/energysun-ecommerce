@@ -29,7 +29,7 @@
 
 <header>
 	
-	<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-lg bg-dark-accent navbar-dark">
 		<section class="container">
 			
 			<a class="navbar-brand" href="<?= Parameters::BASE_URL ?>/dashboard/inicio/vista">EnergySun</a>
@@ -41,14 +41,14 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			
-			<section class="collapse navbar-collapse " id="navbarSupportedContent">
+			<section class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
 				
 				<form class="d-flex m-auto" role="search">
 					<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
 					<button class="btn btn-outline-light" type="submit">Buscar</button>
 				</form>
 				
-				<div class="dropdown text-bg-dark ms-auto">
+				<div class="dropdown">
 					
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						
