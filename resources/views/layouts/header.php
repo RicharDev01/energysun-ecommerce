@@ -59,7 +59,7 @@ use App\Config\Parameters;
         <?php else: ?>
           <!-- BOTONES DE REGISTRO -->
           <div class="auth">
-            <button class="btn btn-primary" type="button">Registrate</button>
+            <a href="<?php Parameters::BASE_URL ?>/auth/registro/vista" class="btn btn-primary" type="button">Registrate</a>
             <a href="<?= Parameters::BASE_URL . '/Auth/login/vista' ?>" class="btn btn-bg-accent">Iniciar sesion</a>
           </div>
         <?php endif; ?>
