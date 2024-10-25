@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers\Citas;
+namespace App\Controllers\Visitas;
 
-class CitaController {
+class VisitaController {
 
   public function formulario():void {
 
-    require_once __DIR__ . '/../../../resources/views/citas/vw_agendar_cita.php';
+    require_once __DIR__ . '/../../../resources/views/visitas/vw_agendar_visita.php';
 
   }
 
@@ -18,7 +18,7 @@ class CitaController {
       $direccion = $_POST['appointment_address'];
     }
 
-    require_once __DIR__ . '/../../../resources/views/citas/vw_agendar_cita.php';
+    require_once __DIR__ . '/../../../resources/views/visitas/vw_agendar_visita.php';
 
   }
 

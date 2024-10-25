@@ -59,9 +59,10 @@ class ClienteDao implements IClienteRepository {
 		return [];
 	}
 	
-	public function find_by_id(int $id)
+	public function find_by_id(int $id): Cliente
 	{
 		// TODO: Implement find_by_id() method.
+		return new Cliente();
 	}
 	
 	public function delete(int $id): bool

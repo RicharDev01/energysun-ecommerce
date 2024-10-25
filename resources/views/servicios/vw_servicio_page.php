@@ -32,7 +32,7 @@ require_once $header;
       <section class="product__buy">
           
           <?php if ( isset( $_SESSION['identity'] ) ) : ?>
-            <a href="<?= Parameters::BASE_URL . '/citas/cita/formulario'?>" class="btn btn-primary btn-lg service__button">Angendar visita</a>
+            <a href="<?= Parameters::BASE_URL . '/visitas/visita/formulario'?>" class="btn btn-primary btn-lg service__button">Angendar visita</a>
             
           <?php else: ?>
               <div class="message-alert alert-warning">
@@ -40,7 +40,7 @@ require_once $header;
                        alt="Icono del delivery" />
     
                   <div class="message-content">
-                      <h3> Para agendar una cita, debe iniciar sesion </h3>
+                      <h3> Para agendar una Visita, debe iniciar sesion </h3>
                   </div>
     
               </div>

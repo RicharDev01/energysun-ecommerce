@@ -16,8 +16,8 @@ class Conexion {
     
     $dbname = 'ENERGYSUN_ECOMMERCE';
     $user = 'root';
-		$password = 'database';
-//    $password = '';
+		// $password = 'database';
+   $password = '';
 
     try {
       

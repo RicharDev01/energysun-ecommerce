@@ -19,7 +19,7 @@ require_once $header;
     </div>
 
     <form 
-      action="<?=Parameters::BASE_URL . '/citas/cita/agendar' ?>" 
+      action="<?=Parameters::BASE_URL . '/visitas/visita/agendar' ?>" 
       method="post"
       class="appointment__form form">
 

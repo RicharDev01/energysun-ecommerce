@@ -84,7 +84,35 @@ class CategoriaDao implements ICategoriaRepository {
    * @return $obj el objeto encontrado
    */
   public function find_by_id( int $id ): Categoria {
-    return new Categoria();
+    
+    try {
+      
+      $query = "SELECT * FROM CATEGORIAS WHERE CAT_CODIGO = :CODIGO";
+
+      $ps = $this->db->prepare($query);
+
+      $ps->bindParam( ":CODIGO", $id );
+      $ps->execute();
+
+      $res = $ps->fetch( PDO::FETCH_ASSOC ) ;  
+
+      // creo el objeto de categoria
+      $categoria = new Categoria();
+
+      // lo pueblo de data al objeto, con la respuesta recibida
+      $categoria->setCodigo( $res["CAT_CODIGO"] );
+      $categoria->setNombre( $res["CAT_NOMBRE"] );
+      $categoria->setDescripcion( $res["CAT_DESCRIPCION"] );
+      $categoria->setFecha_registro( $res["CAT_FECHA_REG"] );
+      $categoria->setFum( $res["CAT_FUM"] );
+
+      // retorno el objeto completo
+      return $categoria;
+
+    } catch (\Throwable $th) {
+      return null;
+    }
+
   }
   
 

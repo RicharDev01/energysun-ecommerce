@@ -2,24 +2,26 @@
 
 namespace App\Repositories;
 
+use App\Models\Producto;
+
 /**
  * Class .
  */
-interface ICrud {
+interface IProductoRepository {
   
   /**
    * Firma del metodo para guardar en base de datos.
-   * @param mixed $obj el objeto de tipo T
+   * @param mixed $producto el objeto de tipo Producto
    * @return boolean
    */
-  public function save( $obj ): bool;
+  public function save( $producto ): bool;
 
   /**
    * Firma del metodo para editar un registro en base de datos
-   * @param mixed $obj
+   * @param mixed $producto
    * @return boolean
    */
-  public function edit( $obj ): bool ;
+  public function edit( $producto ): bool ;
 
   /**
    * Firma del metodo para traer la lista completa de una 
@@ -32,9 +34,9 @@ interface ICrud {
    * Firma del metodo para traer un registro de la base de datos
    * dado su respectivo ID
    * @param int $id
-   * @return $obj el objeto encontrado
+   * @return $producto el objeto encontrado
    */
-  public function find_by_id( int $id );
+  public function find_by_id( int $id ): Producto;
 
   /**
    * Firma del metodo para eliminar un registro de la base de datos, 
