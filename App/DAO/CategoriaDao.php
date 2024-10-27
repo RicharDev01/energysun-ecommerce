@@ -110,7 +110,7 @@ class CategoriaDao implements ICategoriaRepository {
       return $categoria;
 
     } catch (\Throwable $th) {
-      return null;
+      return new Categoria();
     }
 
   }

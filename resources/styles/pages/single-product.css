@@ -15,6 +15,7 @@
   text-align: center;
   border-radius: 1rem;
   background-color: var(--color-bg-accent);
+  overflow: hidden;
 }
 
 .product__image img{
@@ -37,6 +38,7 @@
 .delivery-content{ margin-left: 2rem; }
 
 .product__content h2 { margin-bottom: 2rem; }
+.product__content--servicio h2 { font-size: 5rem; }
 .product__extract { margin-bottom: 2rem; }
 
 .product__buy {

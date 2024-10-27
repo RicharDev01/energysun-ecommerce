@@ -8,7 +8,7 @@ class Parameters {
   const BASE_URL = "http://energysun.com"; // virtual hots
 
   // controlador por defecto
-  const DEFAULT_CONTROLLER = "App\Controllers\InitController";
+  const DEFAULT_CONTROLLER = "App\Controllers\Init\InitController";
 
   // la accion por defecto
   const DEFAULT_ACTION = "index";

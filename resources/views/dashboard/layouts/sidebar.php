@@ -10,8 +10,8 @@ use App\Config\Parameters;
 
     <i class="bi bi-person-circle display-3 mb-2"></i>
 
-    <?php if( isset( $_SESSION['identity'] ) ): ?>
-      <h2 class="h6 mb-4"> <?php echo $_SESSION['identity']->getEmail(); ?> </h2>
+    <?php if( isset( $_SESSION['usuario'] ) ): ?>
+      <h2 class="h6 mb-4"> <?php echo $_SESSION['usuario']->getEmail(); ?> </h2>
     <?php endif; ?>
 
   </article>

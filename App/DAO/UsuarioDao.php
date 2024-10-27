@@ -3,6 +3,7 @@
 namespace App\DAO;
 
 use App\Config\Conexion;
+use App\Models\Rol;
 use App\Models\Usuario;
 use App\Repositories\IUsuarioRepository;
 use PDO;
@@ -106,10 +107,12 @@ class UsuarioDao implements IUsuarioRepository
 
         // Crear la instancia de Rol con su nombre
         $rolDao = new RolDao();
+        
+        /** @var Rol $rol */
 	      $rol = $rolDao->find_by_id( $data_usuario->ROL );
 
         // Asignar Rol al usuario
-        $usuario->setRol($rol);
+        $usuario->setRol($rol );
 				
         // verificar contraseña
         $verify = password_verify($password, $usuario->getClave());

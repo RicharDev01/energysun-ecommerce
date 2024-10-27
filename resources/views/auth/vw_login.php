@@ -15,7 +15,7 @@ require_once $header;
   <?php if (isset( $_SESSION['error_login'] ) ): ?>
     <div class="message-alert alert-error">
       <img src="<?= Parameters::BASE_URL . '/resources/images/icons/icon-error.svg' ?>" class=""
-        alt="Icono del delivery" />
+        alt="Icono de Error" />
 
       <div class="message-content">
         <h3> <?= $_SESSION['error_login'] ?> </h3>

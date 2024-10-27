@@ -10,56 +10,125 @@ require_once $header;
 
 ?>
 
-  <main class="container">
+<main class="container">
 
-    <?php if (isset( $_SESSION['error_login'] ) ): ?>
-      <div class="message-alert alert-error">
-        <img src="<?= Parameters::BASE_URL . '/resources/images/icons/icon-error.svg' ?>" class=""
-             alt="Icono del delivery" />
+  <!-- MENSAJE DE EWRROR DE CREDENCIALES -->
+  <?php if (isset($_SESSION['error_register'])): ?>
+    <div class="message-alert alert-error">
+      <img src="<?= Parameters::BASE_URL . '/resources/images/icons/icon-error.svg' ?>" class="" alt="ICONO DE ERROR" />
 
-        <div class="message-content">
-          <h3> <?= $_SESSION['error_login'] ?> </h3>
-        </div>
-
-      </div>
-    <?php endif; ?>
-    <?php Helpers::deleteSession('error_login'); ?>
-
-    <section class="login">
-
-      <div class="login__image">
-        <img src="<?= Parameters::BASE_URL . '/resources/images/imagen-login.png' ?>"
-             alt="Imagen Agenda su visita en EnergySun">
+      <div class="message-content">
+        <h3> <?= $_SESSION['error_register'] ?> </h3>
       </div>
 
-      <form
-        action="<?= Parameters::BASE_URL . '/auth/login/ingresar' ?>"
-        method="post"
-        class="login__form form"
-        autocomplete="off">
+    </div>
+  <?php endif; ?>
+  <?php Helpers::deleteSession('error_register'); ?>
 
-        <h2>Registro de Usuarios</h2>
+  <!-- MENSAJE DE EXITO DE REGISTRO -->
+  <?php if (isset($_SESSION['success'])): ?>
+    <div class="message-alert">
+      <img src="<?= Parameters::BASE_URL . '/resources/images/icons/icon-error.svg' ?>" class="" alt="ICONO DE ERROR" />
 
-        <div class="form__group">
-          <label for="login_email_username" class="form__label">Usuario: </label>
-          <input type="text" name="login_email_username" class="form__input" id="login_email_username">
+      <div class="message-content">
+        <h3> <?= $_SESSION['success'] ?> </h3>
+      </div>
+
+    </div>
+  <?php endif; ?>
+  <?php Helpers::deleteSession('success'); ?>
+
+  <!-- FORMULARIO -->
+  <section class="register">
+
+    <form action="<?= Parameters::BASE_URL . '/auth/registro/guardar' ?>" method="post" class="register__form"
+      autocomplete="on">
+
+      <h2>Registro de Usuarios</h2>
+
+
+      <section class="register__grid">
+
+        <!-- Datos personales -->
+        <div class="register__grid--l">
+
+          <h3>Datos personales</h3>
+
+          <div class="form__group">
+            <label for="register_nombre1" class="form__label">Primer Nombre: (*)</label>
+            <input type="text" name="register_nombre1" class="form__input" id="register_nombre1">
+          </div>
+
+          <div class="form__group">
+            <label for="register_nombre2" class="form__label">Segundo Nombre:</label>
+            <input type="text" name="register_nombre2" class="form__input" id="register_nombre2">
+          </div>
+
+          <div class="form__group">
+            <label for="register_apellido1" class="form__label">Primer Apellido: (*)</label>
+            <input type="text" name="register_apellido1" class="form__input" id="register_apellido1">
+          </div>
+
+          <div class="form__group">
+            <label for="register_apellido2" class="form__label">Segundo Apellido:</label>
+            <input type="text" name="register_apellido2" class="form__input" id="register_apellido2">
+          </div>
+
+          <div class="form__group">
+            <label for="register_fecha_nac" class="form__label">Fecha de nacimiento:</label>
+            <input type="date" name="register_fecha_nac" class="form__input" id="register_fecha_nac">
+          </div>
+
+          <div class="form__group">
+            <label for="register_telefono" class="form__label">Telefono:</label>
+            <input type="tel" name="register_telefono" class="form__input" id="register_telefono">
+          </div>
+
         </div>
 
-        <div class="form__group">
-          <label for="login-password" class="form__label">Contraseña:</label>
-          <input type="password" name="login_password" class="form__input" id="login-password">
+        <!-- Datos de la cuenta -->
+        <div class="register__grid--r">
+
+          <h3>Datos de la cuenta</h3>
+
+          <!-- El ID del ROL de cliente (Pordefecto) -->
+          <input type="hidden" name="register_rol_id" class="form__input" id="register_rol_id" value="3">
+
+          <div class="form__group">
+            <label for="register_email" class="form__label">Correo Electronico (*):</label>
+            <input type="email" name="register_email" class="form__input" id="register_email">
+          </div>
+
+          <div class="form__group">
+            <label for="register_username" class="form__label">Usuario (*):</label>
+            <input type="text" name="register_username" class="form__input" id="register_username">
+          </div>
+
+          <div class="form__group">
+            <label for="register_password" class="form__label">Contraseña (*):</label>
+            <input type="password" name="register_password" class="form__input" id="register_password">
+          </div>
+
+          <div class="form__group">
+            <label for="register_password_repeat" class="form__label">Repetir Contraseña (*):</label>
+            <input type="password" name="register_password_repeat" class="form__input" id="register_password_repeat">
+          </div>
+
+          <button type="submit" class="btn btn-primary form__button">
+            Registrarme
+          </button>
+
         </div>
 
-        <button type="submit" class="btn btn-primary form__button">
-          Ingresar
-        </button>
-
-      </form>
-
-    </section>
+      </section>
 
 
-  </main>
+    </form>
+
+  </section>
+
+
+</main>
 
 <?php
 $footer = __DIR__ . '/../layouts/footer.php';

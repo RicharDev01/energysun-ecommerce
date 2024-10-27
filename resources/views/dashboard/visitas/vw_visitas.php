@@ -6,7 +6,7 @@ use App\Config\Parameters;
 session_start();
 
 // Verificar si la sesión está iniciada
-if (!isset($_SESSION['identity'])) {
+if (!isset($_SESSION['usuario'])) {
   echo '<h1>Para acceder debe iniciar sesión</h1>';
   echo '<a href="' . Parameters::BASE_URL . '/auth/login/vista">Iniciar sesion</a>';
   exit;

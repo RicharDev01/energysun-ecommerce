@@ -9,6 +9,7 @@ require_once $header;
 use App\Controllers\Categorias\CategoriaController;
 use App\Controllers\Productos\ProductoController;
 use App\Models\Producto;
+use App\Helpers\Helpers;
 
 $categoria_control = new CategoriaController();
 
@@ -38,7 +39,7 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
     </article>
 
     <div class="banner__image">
-      <!-- <img 
+      <!-- <img
       src="<?= Parameters::BASE_URL . '/resources/images/logo-energysun-blanco.png' ?>" 
       alt="logo de energusun"
       class="logo"> -->
@@ -49,7 +50,7 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
   </section>
 
-  <!-- 
+  <!--
  UN NAVBAR DE FILTROS DE LOS PRODUCTOS
  CATEGORIAS:
  KIT SOLARES
@@ -57,7 +58,7 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
  BATERIAS
  INVERSORES
  REGULADORES DE CARGA
- RECIEN AGREGADOS, ULTIMOS AGREGADOS, MAS VENDIDOS 
+ RECIEN AGREGADOS, ULTIMOS AGREGADOS, MAS VENDIDOS
 
  // TODO: AGREGAR ICONOS
 -->
@@ -99,8 +100,8 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
   <h2 class="titulo-busqueda" id="title-product">Productos según tu búsqueda</h2>
 
   <!-- LA LISTA DE LOS PRODUCTOS, LOS CARD, QUE SEAN DE 4 COL EL SU VERSION MAS GRANDE -->
-  <!-- 
-  *LLEVARA IMAGEN DEL PRODUCTO COMO CABECERA, 
+  <!--
+  *LLEVARA IMAGEN DEL PRODUCTO COMO CABECERA,
   *EN SU CUERPO LLEVARA EL NOMBRE DEL PRODUCTO, LA DESCRIPCION DEL PRODUCTO
   * EN SU FOOTER DEBERERA VERSE EL PRECIO Y UN BOTON DE COMPRAR EL PRODUCTO. O MAS DETALLES
   -->
@@ -110,22 +111,34 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
   <section class="products-list">
 
     <!-- LISTA D EPRODUCTOS -->
-    <?php foreach ($lista_productos as $producto ): ?>
+    <?php foreach ($lista_productos as $producto): ?>
 
       <article class="card">
 
         <section class="card__header">
           <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
           <div class="card__vignettes">
-            <span class="vignette__new">Nuevo</span>
-            <span class="vignette__off"> <span>Off</span> <span>35%</span> </span>
+
+            <?php if (Helpers::determinar_estado_producto($producto->getFecha_reg()) === "nuevo"): ?>
+
+              <span class="vignette__new">Nuevo</span>
+
+            <?php endif; ?>
+
+
+            <?php if ($producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
+
+              <span class="vignette__off"> <span>Off</span> <span>
+                  <?php echo Helpers::decimal_a_porcentaje($producto->getDescuento()) ?> </span> </span>
+
+            <?php endif; ?>
+
+
           </div>
           <!-- <img
             src="<?= Parameters::BASE_URL . '/resources/images/kit-solar-vivienda-aislada-5200w-48v-con-bateria-litio-dc-solar_thumb_main.jpg' ?>"
             alt="Kit solar" class="card__image"> -->
-          <img
-            src="<?= $producto->getImagen_url() ?>"
-            alt="Kit solar" class="card__image">
+          <img src="<?= $producto->getImagen_url() ?>" alt="Kit solar" class="card__image">
         </section>
 
         <section class="card__body">
@@ -133,15 +146,32 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
           <h3 class="card__title"> <?= $producto->getNombre() ?> </h3>
 
           <p class="card__description">
-            <?= $producto->getDescripcion() ?>
+            <?= $producto->getExtract() ?>
           </p>
 
         </section>
 
         <section class="card__footer">
-          <span class="card__price"> <?php echo $formatter->formatCurrency($producto->getPrecio(), 'USD'); ?> </span>
+
+          <div class="card__price">
+           
+          <?php if( $producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
+            <span class="card__price--discount">
+              <?php echo $formatter->formatCurrency($producto->getPrecio(), 'USD'); ?>
+            </span>
+          <?php endif; ?>
+
+            <span class="">
+              <?php
+              $precio_con_decuento = Helpers::aplicar_descuento($producto->getPrecio(), $producto->getDescuento());
+              echo $formatter->formatCurrency($precio_con_decuento, 'USD');
+              ?>
+            </span>
+          </div>
+
           <a class="btn btn-primary card__button"
-            href="<?php echo Parameters::BASE_URL . '/productos/producto/ver_producto/' . $producto->getCodigo() ?>">Ver producto</a>
+            href="<?php echo Parameters::BASE_URL . '/productos/producto/ver_producto/' . $producto->getCodigo() ?>">Ver
+            producto</a>
         </section>
 
       </article>

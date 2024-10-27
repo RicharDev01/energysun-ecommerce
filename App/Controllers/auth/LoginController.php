@@ -44,14 +44,14 @@ class LoginController
 
       // identificar al usuario
       // Consulta a la base de datos
-      $identity = $this->usuarioDao->singin($pasword, $email_username);
+      $usuario = $this->usuarioDao->singin($pasword, $email_username);
 	    
 	    
-      switch ($identity) {
+      switch ($usuario) {
 				
         case 'El usuario o email no existe':
-          //algo 
-          $_SESSION['error_login'] = $identity;
+          //algo mal
+          $_SESSION['error_login'] = $usuario;
           require_once __DIR__ . '/../../../resources/views/auth/vw_login.php';
           break;
 					
@@ -60,16 +60,16 @@ class LoginController
           require_once __DIR__ . '/../../../resources/views/auth/vw_login.php';
           break;
 					
-        case is_object($identity):
+        case is_object($usuario):
 					// YA QUE TENGOP EL OBJETO COMPLETO, SE LO DOY A UNA VARIABLE DE SESION
-          $_SESSION['identity'] = $identity;
+          $_SESSION['usuario'] = $usuario;
 					
-          if ($identity->getRol()->getNombre() == 'ADMINISTRADOR') {
+          if ($usuario->getRol()->getNombre() == 'ADMINISTRADOR') {
             $_SESSION['ADMINISTRADOR'] = true;
 	          header( "Location: " . Parameters::BASE_URL . "/dashboard/inicio/vista");
 						exit;
 						
-          } elseif( $identity->getRol()->getNombre() == 'CLIENTE' ) {
+          } elseif( $usuario->getRol()->getNombre() == 'CLIENTE' ) {
 	          $_SESSION['CLIENTE'] = true;
 	          header( "Location: " . Parameters::BASE_URL . "/productos/producto/lista");
 						exit;
@@ -99,7 +99,7 @@ class LoginController
   public function cerrar_sesion()
   {
     session_start();
-    unset($_SESSION['identity']);
+    unset($_SESSION['usuario']);
 
 
     unset($_SESSION['ADMINISTRADOR']);

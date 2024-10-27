@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Parameters;
+use App\Helpers\Helpers;
 
 $header = __DIR__ . '/../layouts/header.php';
 
@@ -18,10 +19,23 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
     <div class="product__image">
       <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
       <div class="card__vignettes">
-        <span class="vignette__new">Nuevo</span>
-        <span class="vignette__off">
-          <span>Off</span> <span>35%</span>
-        </span>
+
+        <?php if (Helpers::determinar_estado_producto($producto->getFecha_reg()) === "nuevo"): ?>
+
+          <span class="vignette__new">Nuevo</span>
+
+        <?php endif; ?>
+
+
+        <?php if ($producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
+
+          <span class="vignette__off"> <span>Off</span> <span>
+            <?php echo Helpers::decimal_a_porcentaje($producto->getDescuento()) ?> </span> 
+          </span>
+
+        <?php endif; ?>
+
+
       </div>
 
       <img src="<?= $producto->getImagen_url() ?>" alt="Imagen del producto x">
@@ -34,12 +48,21 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
       <section class="product__buy">
 
         <div class="product__price">
-          <span class="product__price--through">$4,607.00</span>
-          <span class="product__price--real"> <?php echo $formatter->formatCurrency($producto->getPrecio(), 'USD'); ?> </span>
+         <?php if( $producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
+          <span class="product__price--through">  
+            <?= $formatter->formatCurrency($producto->getPrecio(), 'USD' ) ?>
+          </span>
+         <?php endif; ?>
+
+          <span class="product__price--real"> 
+            <?php 
+              echo $formatter->formatCurrency( Helpers::aplicar_descuento( $producto->getPrecio(), $producto->getDescuento() ), 'USD'); ?>
+          </span>
+
           <!-- <span class="product__price--real"> <?php echo $codigo_producto; ?> </span> -->
         </div>
 
-        <?php if (isset($_SESSION['identity'])): ?>
+        <?php if (isset($_SESSION['usuario'])): ?>
 
           <a href="<?= Parameters::BASE_URL ?>/Payments/Paypal/comprar" class="btn btn-primary btn-lg">Comprar</a>
 
@@ -58,10 +81,10 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
       </section>
 
-      <p class="product__extract"> <?= $producto->getDescripcion() ?> </p>
+      <p class="product__extract"> <?= $producto->getExtract() ?> </p>
 
       <!-- ESTO SERA CONDICIONAL, SI EL PRECIO ES MAYOR A MIL ENVIO ES GRATIS -->
-      <?php if ($producto->getPrecio() >= 1000): ?>
+      <?php if ( Helpers::aplicar_descuento( $producto->getPrecio(), $producto->getDescuento() ) >= 1500): ?>
         <div class="message-delivery">
           <img src="<?= Parameters::BASE_URL . '/resources/images/icons/icon-delivery.svg' ?>" class=""
             alt="Icono del delivery" />
@@ -77,8 +100,8 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
     </article>
 
-    <section class="product__status" >
-      
+    <section class="product__status">
+
       <a href="#" class="product__category"> <span> Categoria: </span> <?= $producto->getCategoria()->getNombre() ?></a>
       <p class="product__stock"> <span>En existemncias: </span> <span> <?= $producto->getStock() ?> </span> </p>
 

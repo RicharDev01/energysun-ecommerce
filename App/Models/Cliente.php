@@ -4,7 +4,7 @@
 	
 	class Cliente extends Usuario {
 		
-		private $codigo;
+		private $codigo_cliente;
 		private $primer_nombre;
 		private $segundo_nombre;
 		private $primer_apellido;
@@ -20,17 +20,17 @@
 		/**
 		 * @return mixed
 		 */
-		public function getCodigo()
+		public function getCodigoCliente()
 		{
-			return $this->codigo;
+			return $this->codigo_cliente;
 		}
 		
 		/**
-		 * @param mixed $codigo
+		 * @param mixed $codigo_cliente
 		 */
-		public function setCodigo($codigo): void
+		public function setCodigoCliente($codigo_cliente): void
 		{
-			$this->codigo = $codigo;
+			$this->codigo_cliente = $codigo_cliente;
 		}
 		
 		/**

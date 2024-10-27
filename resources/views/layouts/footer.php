@@ -30,10 +30,10 @@ use App\Config\Parameters;
   <section class="footer__copy">
     <nav class="footer__menu">
       <a href="<?=Parameters::BASE_URL ?>" class="footer__link">Inicio</a>
-      <a href="<?=Parameters::BASE_URL.'/init/nosotros' ?>" class="footer__link">Nosotros</a>
+      <a href="<?=Parameters::BASE_URL.'/init/init/aboutus' ?>" class="footer__link">Nosotros</a>
       <a href="<?=Parameters::BASE_URL.'/productos/producto/lista' ?>" class="footer__link">Productos</a>
       <a href="<?=Parameters::BASE_URL.'/servicios/servicio/lista' ?>" class="footer__link">Servicios</a>
-      <a href="<?=Parameters::BASE_URL.'/init/contacto' ?>" class="footer__link">Contacto</a>
+      <a href="<?=Parameters::BASE_URL.'/init/init/contact' ?>" class="footer__link">Contacto</a>
 <!--      <a href="--><?php //=Parameters::BASE_URL.'/init/politicas' ?><!--" class="footer__link footer__link--politicas">Políticas</a>-->
       <a href="<?=Parameters::BASE_URL.'/auth/Encriptador/index' ?>" class="footer__link footer__link--politicas">Encriptar</a>
     </nav>

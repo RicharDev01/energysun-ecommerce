@@ -54,8 +54,8 @@
 						
 						<i class="bi bi-gear"></i>
 						
-						<?php if( isset( $_SESSION['identity'] ) ): ?>
-						<?php echo $_SESSION['identity']->getUsername() ?>
+						<?php if( isset( $_SESSION['usuario'] ) ): ?>
+						<?php echo $_SESSION['usuario']->getUsername() ?>
 						<?php endif; ?>
 						
 					</a>

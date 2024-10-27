@@ -42,5 +42,15 @@ interface IClienteRepository {
 	 * @return boolean
 	 */
 	public function delete( int $id ): bool;
+
+
+	/**
+	 * Obtener la cantidad total de los clientes registrados
+	 * @return int
+	 */
+	public function obtener_total_clientes(): int ;
+
+
+	public function find_by_user_id( int $user_id ): Cliente;
 		
 }

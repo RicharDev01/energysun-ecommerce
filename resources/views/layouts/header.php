@@ -49,11 +49,11 @@ use App\Config\Parameters;
         </ul>
 
 
-        <?php if ( isset( $_SESSION['identity'] ) ): ?>
+        <?php if ( isset( $_SESSION['usuario'] ) ): ?>
           
           <!-- UNA VEZ LOGUEADO -->
           <div class="auth">
-            <span class="btn btn-primary" type="button"> <?php echo $_SESSION['identity']->getUsername(); ?> </span>
+            <span class="btn btn-primary" type="button"> <?php echo $_SESSION['usuario']->getUsername(); ?> </span>
             <a href="<?php Parameters::BASE_URL ?>/auth/login/cerrar_sesion" class="btn btn-danger" >Cerrar sesion</a>
           </div>
         <?php else: ?>

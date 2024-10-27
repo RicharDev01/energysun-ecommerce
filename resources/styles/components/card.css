@@ -109,6 +109,12 @@
   letter-spacing: 0.2rem;
 }
 
+.card__price--discount {
+  text-decoration: line-through;
+  font-size: 1.1rem;
+  color: rgba(255,255,255, .5);
+}
+
 /* SOBREESCRIBIRE USANDO NUEVA CLASE AL ARCHIVO buttons.css */
 .card__button {
   border-radius: 2rem;
