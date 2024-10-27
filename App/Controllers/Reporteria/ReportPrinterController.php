@@ -16,7 +16,7 @@ class ReportPrinterController
       ob_start();
 
       // ruta absoluta donde se encuentra la pagina HTML que queremos convertir a PDF
-      include dirname(__FILE__).'/../../../resources/views/reports/first_pdf.php';
+      include dirname(__FILE__).'/../../../resources/views/reports/factura.php';
 
       // obtenemos el buffer generado y se lo incluimos a una variable, que sera incluida en el PDF
       $content = ob_get_clean();
@@ -28,7 +28,7 @@ class ReportPrinterController
 
       $html2pdf->writeHTML($content);
 
-      $html2pdf->output('example00.pdf');
+      $html2pdf->output('factura_0001.pdf');
 
     } catch (Html2PdfException $e) {
       $html2pdf->clean();
