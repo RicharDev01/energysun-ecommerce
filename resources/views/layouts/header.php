@@ -53,7 +53,23 @@ use App\Config\Parameters;
           
           <!-- UNA VEZ LOGUEADO -->
           <div class="auth">
-            <span class="btn btn-primary" type="button"> <?php echo $_SESSION['usuario']->getUsername(); ?> </span>
+          
+            <?php if( isset( $_SESSION['ADMINISTRADOR'] ) && $_SESSION['ADMINISTRADOR'] ): ?>
+              <a 
+                href="<?= Parameters::BASE_URL ?>/dashboard/inicio/vista" 
+                class="btn btn-primary" 
+                type="button"> 
+                <?php echo $_SESSION['usuario']->getUsername(); ?> 
+              </a>
+            <?php elseif( isset( $_SESSION['CLIENTE'] ) && $_SESSION['CLIENTE'] ):  ?>
+              <a 
+                href="#" 
+                class="btn btn-primary" 
+                type="button"> 
+                <?php echo $_SESSION['usuario']->getUsername(); ?> 
+              </a>
+            <?php endif; ?>
+
             <a href="<?php Parameters::BASE_URL ?>/auth/login/cerrar_sesion" class="btn btn-danger" >Cerrar sesion</a>
           </div>
         <?php else: ?>
