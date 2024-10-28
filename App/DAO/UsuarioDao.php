@@ -64,7 +64,7 @@ class UsuarioDao implements IUsuarioRepository
 
   }
 
-  public function singin( string $password, string $email_username )
+  public function singin( string $password, string $email_username ): bool|string|Usuario
   {
 
     // comprobamos si existe el usuario en la db
