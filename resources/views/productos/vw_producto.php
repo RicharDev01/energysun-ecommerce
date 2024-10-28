@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Parameters;
+use App\Controllers\Productos\ProductoController;
 use App\Helpers\Helpers;
 
 $header = __DIR__ . '/../layouts/header.php';
@@ -8,6 +9,8 @@ $header = __DIR__ . '/../layouts/header.php';
 require_once $header;
 
 $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+
+$producto_control = new ProductoController();
 
 ?>
 
@@ -132,93 +135,73 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
   <section class="products-list">
 
+    <!-- LISTA D EPRODUCTOS -->
+    <?php foreach ($producto_control->relacionados( $producto->getCategoria()->getCodigo(), $producto->getCodigo() ) as $producto): ?>
 
-    <article class="card">
+      <article class="card">
 
-      <section class="card__header">
-        <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
-        <div class="card__vignettes">
-          <span class="vignette__new">Nuevo</span>
-          <span class="vignette__off"> <span>Off</span> <span>35%</span> </span>
-        </div>
-        <img
-          src="<?= Parameters::BASE_URL . '/resources/images/kit-solar-vivienda-aislada-5200w-48v-con-bateria-litio-dc-solar_thumb_main.jpg' ?>"
-          alt="Kit solar" class="card__image">
-      </section>
+        <section class="card__header">
+          <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
+          <div class="card__vignettes">
 
-      <section class="card__body">
-        <h3 class="card__title">Kit Solar Vivienda Aislada 5200W 48V con Batería Litio DC Solar</h3>
-        <p class="card__description">
-          Este Kit Solar está diseñado para abastecer las necesidades energéticas de una vivienda unifamiliar que no
-          cuenta con acceso a la red eléctrica convencional.
-        </p>
-      </section>
+            <?php if (Helpers::determinar_estado_producto($producto->getFecha_reg()) === "nuevo"): ?>
 
-      <section class="card__footer">
-        <span class="card__price">$4.607,08</span>
-        <a class="btn btn-primary card__button"
-          href="<?= Parameters::BASE_URL . '/productos/producto/ver_producto?codigo=0001' ?>">Ver producto</a>
-      </section>
+              <span class="vignette__new">Nuevo</span>
 
-    </article>
+            <?php endif; ?>
 
-    <article class="card">
 
-      <section class="card__header">
-        <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
-        <div class="card__vignettes">
-          <!-- <span class="vignette__new">Nuevo</span> -->
-          <span class="vignette__off"> <span>Off</span> <span>35%</span> </span>
-        </div>
-        <img
-          src="<?= Parameters::BASE_URL . '/resources/images/kit-paneles-solares-autoconsumo-fotovoltaico-huawei-3000w_thumb_main.jpg' ?>"
-          alt="Kit solar" class="card__image">
-      </section>
+            <?php if ($producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
 
-      <section class="card__body">
-        <h3 class="card__title">Kit Paneles Solares Autoconsumo Fotovoltaico Huawei 3000W</h3>
-        <p class="card__description">
-          El Kit Conexión Red Huawei 3000W 16100Whdia se trata de un sistema de autoconsumo directo de coste muy
-          económico y rápida amortización.
-        </p>
-      </section>
+              <span class="vignette__off"> <span>Off</span> <span>
+                  <?php echo Helpers::decimal_a_porcentaje($producto->getDescuento()) ?> </span> </span>
 
-      <section class="card__footer">
-        <span class="card__price">$1.456,49</span>
-        <a class="btn btn-primary card__button"
-          href="<?= Parameters::BASE_URL . '/productos/producto/ver_producto?codigo=0002' ?>">Ver producto</a>
-      </section>
+            <?php endif; ?>
 
-    </article>
 
-    <article class="card">
+          </div>
+          <!-- <img
+            src="<?= Parameters::BASE_URL . '/resources/images/kit-solar-vivienda-aislada-5200w-48v-con-bateria-litio-dc-solar_thumb_main.jpg' ?>"
+            alt="Kit solar" class="card__image"> -->
+          <img src="<?= $producto->getImagen_url() ?>" alt="Kit solar" class="card__image">
+        </section>
 
-      <section class="card__header">
-        <!-- CONSIDERACION DE VIñETAS DE NUEVO O OFERTA O AMBAS-->
-        <div class="card__vignettes">
-          <span class="vignette__new">Nuevo</span>
-          <!-- <span class="vignette__off"> <span>Off</span> <span>35%</span> </span> -->
-        </div>
-        <img
-          src="<?= Parameters::BASE_URL . '/resources/images/kit-autoconsumo-trifasico-kostal-4200w-22000whdia_thumb_main.jpg' ?>"
-          alt="Kit solar" class="card__image">
-      </section>
+        <section class="card__body">
 
-      <section class="card__body">
-        <h3 class="card__title">Kit Autoconsumo Trifásico Kostal 4200W 22000Whdia</h3>
-        <p class="card__description">
-          Este Kit se trata de un sistema de autoconsumo para instalaciones trifásicas que incorpora una batería para
-          acumulación de excedentes de producción solar.
-        </p>
-      </section>
+          <h3 class="card__title"> <?= $producto->getNombre() ?> </h3>
 
-      <section class="card__footer">
-        <span class="card__price">$10.241,68</span>
-        <a class="btn btn-primary card__button"
-          href="<?= Parameters::BASE_URL . '/productos/producto/ver_producto?codigo=0003' ?>">Ver producto</a>
-      </section>
+          <p class="card__description">
+            <?= $producto->getExtract() ?>
+          </p>
 
-    </article>
+        </section>
+
+        <section class="card__footer">
+
+          <div class="card__price">
+           
+          <?php if( $producto->getDescuento() > 0 && $producto->getDescuento() <= 1): ?>
+            <span class="card__price--discount">
+              <?php echo $formatter->formatCurrency($producto->getPrecio(), 'USD'); ?>
+            </span>
+          <?php endif; ?>
+
+            <span class="">
+              <?php
+              $precio_con_decuento = Helpers::aplicar_descuento($producto->getPrecio(), $producto->getDescuento());
+              echo $formatter->formatCurrency($precio_con_decuento, 'USD');
+              ?>
+            </span>
+          </div>
+
+          <a class="btn btn-primary card__button"
+            href="<?php echo Parameters::BASE_URL . '/productos/producto/ver_producto/' . $producto->getCodigo() ?>">Ver
+            producto</a>
+        </section>
+
+      </article>
+
+    <?php endforeach; ?>
 
   </section>
 

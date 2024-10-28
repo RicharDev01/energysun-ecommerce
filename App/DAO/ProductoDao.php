@@ -6,6 +6,7 @@ use App\Config\Conexion;
 use App\Models\Producto;
 use App\Repositories\IProductoRepository;
 use PDO;
+use PDOException;
 
 class ProductoDao  implements IProductoRepository {
 
@@ -39,13 +40,17 @@ class ProductoDao  implements IProductoRepository {
    * tabla en base de datos
    * @return array Lista con los registros encontrados
    */
-  public function find_all(): array {
+  public function find_all( string $orden = 'DESC' ): array {
     
     try {
+
+      // Validar que $orden solo tenga los valores permitidos
+      $orden = strtoupper($orden) === 'ASC' ? 'ASC' : 'DESC';
       
-      $query = "SELECT * FROM productos";
+      $query = "SELECT * FROM productos ORDER BY PROD_PRECIO $orden";
 
       $ps = $this->db->prepare($query);
+      //$ps->bindParam( ":ORDEN", $orden );
       $ps->execute();
 
       $productos = array();
@@ -59,11 +64,13 @@ class ProductoDao  implements IProductoRepository {
 
       return $productos;
 
-    } catch (\Throwable $th) {
+    } catch ( PDOException $e ) {
+      echo $e->getMessage();
       return [] ;
     }
 
   }
+
   /**
    * Firma del metodo para traer un registro de la base de datos
    * dado su respectivo ID
@@ -124,6 +131,70 @@ class ProductoDao  implements IProductoRepository {
     $objProducto->setCategoria($categoria);
 
     return $objProducto;
+  }
+
+  public function find_by_category(int $categoria_id): array {
+
+    try {
+
+      $query = "SELECT *
+                FROM productos P
+                INNER JOIN categorias C
+                  ON C.CAT_CODIGO = P.PROD_CATEGORIA_ID
+                WHERE C.CAT_CODIGO = :CATEGORIA_ID";
+    
+    $ps = $this->db->prepare($query);
+    $ps->bindParam( ':CATEGORIA_ID', $categoria_id );
+    $ps->execute();
+
+    $productos_arr = $ps->fetchAll(PDO::FETCH_ASSOC);
+
+    // lista de productos encontrados
+    $lista_productos = array();
+
+    foreach( $productos_arr as $prod ){
+
+      $producto = $this->getProducto( $prod );
+
+      array_push( $lista_productos, $producto );
+
+    }
+    
+    return $lista_productos;
+
+    } catch(PDOException $e) {
+      return [];
+    }
+
+  }
+
+  public function similar_product( int $categoria_id, int $producto_id ): array{
+
+    try {
+      
+      $query = "SELECT * FROM productos P WHERE P.PROD_CATEGORIA_ID = :CATEGORIA_ID AND P.PROD_CODIGO <> :PRODUCTO_ID LIMIT 4";
+
+      $ps = $this->db->prepare($query);
+      $ps->bindParam( ":CATEGORIA_ID", $categoria_id );
+      $ps->bindParam( ":PRODUCTO_ID", $producto_id );
+      $ps->execute();
+
+      $productos = array();
+
+      foreach ($ps->fetchAll(PDO::FETCH_ASSOC) as $prod) {
+        $objProducto = $this->getProducto($prod);
+
+        // agrego cada uno de los objetos creados 
+        $productos[] = $objProducto;
+      }
+
+      return $productos;
+
+    } catch ( PDOException $e ) {
+      echo $e->getMessage();
+      return [] ;
+    }
+
   }
 
 }

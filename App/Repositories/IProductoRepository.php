@@ -46,4 +46,17 @@ interface IProductoRepository {
    */
   public function delete( int $id ): bool;
 
+  /**
+   * Firma de metodo para fltrar productos por su categoria
+   * @param int $categoria_id
+   * @return array de productos por categoria
+   */
+  public function find_by_category( int $categoria_id ): array;
+
+  /**
+   * Firma de metodo para mostrar productos similares al mostrado
+   * @return array
+   */
+  public function similar_product( int $categoria_id, int $product_id ): array;
+
 }

@@ -68,9 +68,11 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
       <?php foreach ($lista_categorias as $key => $categoria): ?>
 
-        <button class="btn btn-danger"> <?= $categoria->getNombre() ?> </button>
-
+        <a href="<?= Parameters::BASE_URL ?>/productos/producto/filtro/<?= $categoria->getCodigo() ?>" class="btn btn-danger"> <?= $categoria->getNombre() ?> </a>
+        
       <?php endforeach; ?>
+
+      <a href="<?= Parameters::BASE_URL ?>/productos/producto/lista" class="btn btn-danger"> TODOS </a>
 
       <!-- <button class="btn btn-danger">KIT SOLARES</button>
     <button class="btn btn-danger">PANELES SOLARES</button>
@@ -80,15 +82,18 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
    -->
     </nav>
 
-    <div class="filters__sortby">
-      <select name="sortby" id="sortby" class="sortby__input">
-        <option value="">RECIEN AGREGADOS</option>
+    <form 
+      action="<?= Parameters::BASE_URL ?>/productos/producto/lista" 
+      class="filters__sortby" method="POST">
+
+      <select name="sortby" id="sortby" class="sortby__input" onchange="this.form.submit()" >
+        <option value="DESC" <?php echo $selected ? '' : 'selected' ?> >PRECIO MÁS ALTO</option>
+        <option value="ASC" <?php echo $selected ? 'selected' : '' ?> >PRECIO MÁS BAJO</option>
+        <!-- <option value="">RECIEN AGREGADOS</option>
         <option value="">MÁS ANTIGUOS</option>
-        <option value="">MÁS VENDIDOS</option>
-        <option value="">PRECIO MÁS BAJO</option>
-        <option value="">PRECIO MÁS ALTO</option>
+        <option value="">MÁS VENDIDOS</option> -->
       </select>
-    </div>
+    </form>
 
   </section>
 
