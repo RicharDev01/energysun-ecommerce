@@ -59,4 +59,10 @@ interface IProductoRepository {
    */
   public function similar_product( int $categoria_id, int $product_id ): array;
 
+  /**
+   * Obtener la lista de los 4 productos mas vendidos
+   * @return array
+   */
+  public function top_sell_products(): array;
+
 }

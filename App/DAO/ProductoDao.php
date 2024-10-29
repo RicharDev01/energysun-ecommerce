@@ -197,4 +197,27 @@ class ProductoDao  implements IProductoRepository {
 
   }
 
+  public function top_sell_products(): array {
+
+    try {
+      
+      $query = "SELECT P.PROD_NOMBRE, P.PROD_CODIGO, P.PROD_IMAGEN_URL, SUM(DF.DET_CANTIDAD) AS TOTAL_VENDIDO
+                FROM PRODUCTOS P
+                INNER JOIN DETALLE_FACTURA DF ON DF.DET_CODIGO_PRODUCTO = P.PROD_CODIGO
+                GROUP BY P.PROD_CODIGO, P.PROD_NOMBRE, P.PROD_IMAGEN_URL
+                ORDER BY TOTAL_VENDIDO DESC
+                LIMIT 4";
+    
+    $result = $this->db->query($query);
+    
+    $top_sell_products = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    return $top_sell_products;
+
+    } catch (PDOException $e) {
+      return [];
+    }
+
+  }
+
 }

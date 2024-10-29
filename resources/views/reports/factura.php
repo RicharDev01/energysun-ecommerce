@@ -94,15 +94,17 @@ use App\Config\Parameters;
 
     <table>
       <tr>
+
         <td class="info__cliente" style="width: 70%; text-align: left;">
           <h1>EnergySun</h1>
           <p>Factura #: <?php echo '0001' ?></p>
           <p>Fecha de Emisión: <?php echo '27/10/2024'; ?></p>
           <p>Método de Pago: <?php echo 'medios electronicos'; ?></p>
         </td>
+
         <td class="logotipo" style="width: 25%; text-align: right;" colspan="">
-          <!-- Cambia este texto por una imagen si tienes el logo -->
           <img src="<?= Parameters::BASE_URL ?>/resources/images/logo-energysun-blanco.png" width="100" alt="">
+          <h3>EnergySun</h3>
         </td>
       </tr>
     </table>

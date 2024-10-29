@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Parameters;
+use App\Controllers\Dashboard\ProductoController;
 
 session_start();
 
@@ -20,6 +21,8 @@ if (!isset($_SESSION['ADMINISTRADOR'])) {
 
 require_once __DIR__ . "/layouts/navbar.php";
 
+$formatter = new NumberFormatter( "en_US", NumberFormatter::CURRENCY );
+
 ?>
 
 <section class="container-fluid h-100">
@@ -38,7 +41,7 @@ require_once __DIR__ . "/layouts/navbar.php";
 					<i class="display-5 bi bi-cash-coin"></i>
 					<div class="card-body">
 						<h4 class="card-title">Total recaudado</h4>
-						<p class="card-text display-6 fw-bold"> $82,000.25 </p>
+						<p class="card-text display-6 fw-bold"> <?= $formatter->formatCurrency( $total_recaudado, 'USD')?> </p>
 					</div>
 				</article>
 
@@ -46,7 +49,7 @@ require_once __DIR__ . "/layouts/navbar.php";
 					<i class="display-5 bi bi-receipt"></i>
 					<div class="card-body">
 						<h4 class="card-title">Total de ordenes</h4>
-						<p class="card-text display-6 fw-bold">57</p>
+						<p class="card-text display-6 fw-bold"> <?= $total_ordenes ?> </p>
 					</div>
 				</article>
 
@@ -62,67 +65,34 @@ require_once __DIR__ . "/layouts/navbar.php";
 					<i class="display-5 bi bi-truck"></i>
 					<div class="card-body">
 						<h4 class="card-title">Total de envios</h4>
-						<p class="card-text display-6 fw-bold">35</p>
+						<p class="card-text display-6 fw-bold"> <?= $total_envios ?> </p>
 					</div>
 				</article>
 
 			</div>
 
-			<section class="card mt-3">
+			<section class="card my-4">
 
-				<h2>Top de productos</h2>
+				<h2 class="mx-5">Top de productos</h2>
 
 				<div class="row gx-2 justify-content-center">
 
-					<article class="card mx-2 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
-						<img
-							src="<?= Parameters::BASE_URL ?>/resources/images/kit-autoconsumo-trifasico-kostal-4200w-22000whdia_thumb_main.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Kit de panel</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-								content.</p>
-							<a href="#" class="btn btn-primary">Ver prodcuto</a>
-						</div>
-					</article>
+					<?php foreach ($top_sell_products as $prod): ?>
 
-					<article class="card mx-2 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
-						<img
-							src="<?= Parameters::BASE_URL ?>/resources/images/kit-autoconsumo-trifasico-kostal-4200w-22000whdia_thumb_main.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Kit de panel</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-								content.</p>
-							<a href="#" class="btn btn-primary">Ver prodcuto</a>
-						</div>
-					</article>
+						<article class="card m-2 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
+							<img
+								src="<?= $prod['PROD_IMAGEN_URL'] ?>"
+								class="card-img-top" alt="..." style="height: 250px; object-fit: cover;">
 
-					<article class="card mx-2 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
-						<img
-							src="<?= Parameters::BASE_URL ?>/resources/images/kit-autoconsumo-trifasico-kostal-4200w-22000whdia_thumb_main.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Kit de panel</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-								content.</p>
-							<a href="#" class="btn btn-primary">Ver prodcuto</a>
-						</div>
-					</article>
+							<div class="card-body">
+								<h5 class="card-title"><?= $prod['PROD_NOMBRE'] ?></h5>
 
-					<article class="card mx-2 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
-						<img
-							src="<?= Parameters::BASE_URL ?>/resources/images/kit-autoconsumo-trifasico-kostal-4200w-22000whdia_thumb_main.jpg"
-							class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Kit de panel</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-								content.</p>
-							<a href="#" class="btn btn-primary">Ver prodcuto</a>
-						</div>
-					</article>
+								<a href="<?= Parameters::BASE_URL ?>/productos/producto/ver_producto/<?= $prod['PROD_CODIGO'] ?>" class="btn btn-primary">Ver
+									prodcuto</a>
+							</div>
+						</article>
+					<?php endforeach; ?>
 
-					
 				</div> <!-- fin del row -->
 
 			</section>

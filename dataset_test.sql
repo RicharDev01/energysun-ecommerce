@@ -167,7 +167,7 @@ VALUES (1, -- Este valor debe corresponder al ID de la categoria a la que perten
         En resumen, este Kit Solar Vivienda Aislada 5200W 48V con Batería Litio DC Solar representa una solución que permite lograr la independencia energética, especialmente en lugares donde la red eléctrica no llega, garantizando el suministro de energía de manera sostenible y autónoma.',
 
         'https://cdn.autosolar.es/images/kits-solares-aislada/kit-solar-vivienda-aislada-5200w-48v-con-bateria-litio-dc-solar_thumb_main.jpg',
-        20,
+        25,
         0.35);
 
 INSERT INTO PRODUCTOS(PROD_CATEGORIA_ID, PROD_NOMBRE, PROD_PRECIO, PROD_EXTRACT, PROD_DESCRIPCION, PROD_IMAGEN_URL,
@@ -196,7 +196,7 @@ VALUES (1, -- Este valor debe corresponder al ID de la categoría a la que perte
          El kit solar híbrido 5000W ofrece flexibilidad al premitir que el sistema utilice energía del sol directamente de los paneles solares en horas de producción solar alta, pero al mismo tiempo trabaja con baterías de almacenamiento cuando no hay radiación solar. Esto es útil para maximizar la eficiencia y la autonomía del kit solar híbrido 5000W, especialmente en entornos donde la energía solar puede no estar disponible todo el tiempo.',
 
         'https://cdn.autosolar.es/images/kits-solares-conexion-red/kit-instalacion-placas-solares-autoconsumo-5000w-con-bateria-huawei-luna_thumb_main.jpg',
-        10,
+        43,
         0.35);
 
 INSERT INTO PRODUCTOS(PROD_CATEGORIA_ID, PROD_NOMBRE, PROD_PRECIO, PROD_EXTRACT, PROD_DESCRIPCION, PROD_IMAGEN_URL,
@@ -276,7 +276,7 @@ VALUES (2,
         'El pallet del Panel Solar 410W Monocristalino PERC Tensite es la la solución ideal para adquirir y recibir en un solo pallet varias unidades de este panel solar tan versátil, de dimensiones contenidas y con una eficiencia alta demostrada',
         'El pallet del Panel Solar 410W Monocristalino PERC Tensite es la la solución ideal para adquirir y recibir en un solo pallet varias unidades de este panel solar tan versátil, de dimensiones contenidas y con una eficiencia alta demostrada',
         'https://cdn.autosolar.es/images/paneles-solares/pallet-paneles-solares-410w-monocristalinos-perc-tensite_thumb_main.jpg',
-        4);
+        15);
 
 -- ++++++++++++++++++++++++++++++ BATERIAS ++++++++++++++++++++++++
 INSERT INTO PRODUCTOS(PROD_CATEGORIA_ID, PROD_NOMBRE, PROD_PRECIO, PROD_EXTRACT, PROD_DESCRIPCION, PROD_IMAGEN_URL,
@@ -317,7 +317,7 @@ VALUES (3,
         'Batería estacionaria BAE 695Ah 12V, utilizada en aplicaciones solares y sistemas híbridos',
         'Batería estacionaria BAE 695Ah 12V, utilizada en aplicaciones solares y sistemas híbridos',
         'https://cdn.autosolar.es/images/baterias-estacionarias/bateria-estacionaria-bae-12v-695ah_thumb_main.jpg',
-        14);
+        36);
 
 INSERT INTO PRODUCTOS(PROD_CATEGORIA_ID, PROD_NOMBRE, PROD_PRECIO, PROD_EXTRACT, PROD_DESCRIPCION, PROD_IMAGEN_URL,
                       PROD_STOCK)
@@ -429,7 +429,8 @@ VALUES (5,
         223,
         'El Regulador MPPT 150V 60A LCD 12/24/48V es un avanzado controlador de carga solar con maximizador MPPT',
         'https://cdn.autosolar.es/images/reguladores-carga/regulador-mppt-150v-60a-lcd-122448v_thumb_main.jpg',
-        16);
+        19);
+
 
 
 -- ++++++++++++++++++++++++++++++ VISITAS ++++++++++++++++++++++++
@@ -567,6 +568,31 @@ INSERT INTO FACTURAS(
     'Medio Electrónico'
 );
 
+-- Factura 5
+INSERT INTO FACTURAS(
+    FAC_CODIGO_CLIENTE,
+    FAC_FECHA_EMISION,
+    FAC_METODO_PAGO
+) VALUES (
+    2,
+    CURRENT_TIMESTAMP(),
+    'Medio Electrónico'
+);
+
+-- Factura 6
+INSERT INTO FACTURAS(
+    FAC_CODIGO_CLIENTE,
+    FAC_FECHA_EMISION,
+    FAC_METODO_PAGO
+) VALUES (
+    4,
+    CURRENT_TIMESTAMP(),
+    'Medio Electrónico'
+);
+
+
+
+
 -- ++++++++++++++++++++++++++++++ DETALLES FACTURA ++++++++++++++++++++++++
 -- Detalle Factura 1
 INSERT INTO DETALLE_FACTURA(
@@ -634,6 +660,38 @@ INSERT INTO DETALLE_FACTURA(
     (3 * 4100.80) * 1.13 * (1 - 0.0) -- Cálculo del total con impuestos y descuento
 );
 
+-- DETALLE FACTURA 5
+  INSERT INTO DETALLE_FACTURA(
+    DET_CODIGO_FACTURA,
+    DET_CODIGO_PRODUCTO,
+    DET_CANTIDAD,
+    DET_IMPUESTO,
+    DET_DESCUENTOS,
+    DET_TOTAL
+) VALUES (
+    5, -- ID de la factura
+    5, -- ID del producto
+    2, -- Cantidad de productos comprados
+    0.13, -- Impuesto aplicado (13%)
+    0.35, -- Descuento aplicado (35%)
+    (2 * 1500.80) * 1.13 * (1 - 0.35) -- Cálculo del total con impuestos y descuento
+);
+
+-- DETALLE FACTURA 6
+  INSERT INTO DETALLE_FACTURA(
+    DET_CODIGO_FACTURA,
+    DET_CODIGO_PRODUCTO,
+    DET_CANTIDAD,
+    DET_IMPUESTO,
+    DET_TOTAL
+) VALUES (
+    6, -- ID de la factura
+    9, -- ID del producto
+    5, -- Cantidad de productos comprados
+    0.13, -- Impuesto aplicado (13%)
+    (5 * 90.85) * 1.13 * (1 - 0.0) -- Cálculo del total con impuestos y descuento
+);
+
 
 -- ++++++++++++++++++++++++++++++ ENVIOS ++++++++++++++++++++++++
 -- Envío 1: Estado PENDIENTE
@@ -641,11 +699,13 @@ INSERT INTO ENVIOS(
     ENV_CODIGO_CLIENTE,
     ENV_MUNICIPIO,
     ENV_DIRECCION,
+    ENV_COMENTARIO,
     ENV_ESTADO
 ) VALUES (
     1, -- ID del cliente
     'San Salvador',
     'Av. Siempre Viva 123, Colonia Centro',
+    'COMENTARIO DE LA VIISTA #1',
     'PENDIENTE'
 );
 
@@ -654,11 +714,13 @@ INSERT INTO ENVIOS(
     ENV_CODIGO_CLIENTE,
     ENV_MUNICIPIO,
     ENV_DIRECCION,
+    ENV_COMENTARIO,
     ENV_ESTADO
 ) VALUES (
     2,
     'Santa Tecla',
     'Blvd. Del Hipódromo 456, Colonia Escalón',
+    'COMENTARIO DE LA VIISTA #2',
     'EN RUTA'
 );
 
@@ -667,11 +729,13 @@ INSERT INTO ENVIOS(
     ENV_CODIGO_CLIENTE,
     ENV_MUNICIPIO,
     ENV_DIRECCION,
+    ENV_COMENTARIO,
     ENV_ESTADO
 ) VALUES (
     3,
     'Mejicanos',
     'Calle Los Pinos 789, Residencial Las Flores',
+    'COMENTARIO DE LA VIISTA #3',
     'ENTREGADO'
 );
 
@@ -680,10 +744,12 @@ INSERT INTO ENVIOS(
     ENV_CODIGO_CLIENTE,
     ENV_MUNICIPIO,
     ENV_DIRECCION,
+    ENV_COMENTARIO,
     ENV_ESTADO
 ) VALUES (
     4,
     'Soyapango',
     'Calle Principal 101, Colonia Santa Lucia',
+    'COMENTARIO DE LA VIISTA #4',
     'CANCELADO'
 );
