@@ -46,6 +46,7 @@ class FacturaDao implements IFacturaRepository
       return $total_recaudado;
 
     } catch (PDOException $e) {
+      echo $e->getMessage();
       return 0;
     }
 

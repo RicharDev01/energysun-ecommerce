@@ -50,7 +50,7 @@ class EnvioDao implements IEnvioRepository {
    * @param int $id
    * @return $envio el objeto encontrado
    */
-  public function find_by_id( int $id ): Envio | null {
+  public function find_by_id( int $id ): ?Envio {
     return null;
   }
 

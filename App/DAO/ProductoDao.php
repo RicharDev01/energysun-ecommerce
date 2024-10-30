@@ -109,7 +109,7 @@ class ProductoDao  implements IProductoRepository {
    * @param mixed $prod
    * @return Producto
    */
-  public function getProducto(mixed $prod): Producto
+  public function getProducto( $prod ): Producto
   {
     $objProducto = new Producto();
     $objProducto->setCodigo($prod["PROD_CODIGO"]);

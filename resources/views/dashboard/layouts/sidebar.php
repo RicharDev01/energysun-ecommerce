@@ -60,7 +60,7 @@ use App\Config\Parameters;
       </a>
     </li>
 
-    <li>
+    <!-- <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/envio/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-truck"></i> Envios</span>
         <span class="badge text-bg-primary rounded-pill">10</span>
@@ -77,9 +77,9 @@ use App\Config\Parameters;
     <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/rol/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-key"></i> Roles</span>
-        <!--                       <span class="badge text-bg-primary rounded-pill">14</span>-->
+          /// <span class="badge text-bg-primary rounded-pill">14</span>
       </a>
-    </li>
+    </li> -->
 
   </ul>
 

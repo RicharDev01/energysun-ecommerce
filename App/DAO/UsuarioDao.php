@@ -13,11 +13,14 @@ class UsuarioDao implements IUsuarioRepository
 {
 
   private PDO $db;
+  private RolDao $rolDao;
 
   public function __construct()
   {
     $con = new Conexion();
     $this->db = $con->getConexion();
+
+    $this->rolDao = new RolDao();
   }
 
   /**
@@ -64,7 +67,7 @@ class UsuarioDao implements IUsuarioRepository
 
   }
 
-  public function singin( string $password, string $email_username ): bool|string|Usuario
+  public function singin( string $password, string $email_username )
   {
 
     // comprobamos si existe el usuario en la db
@@ -150,14 +153,87 @@ class UsuarioDao implements IUsuarioRepository
 
   public function find_all(): array
   {
-    // TODO: Implement find_all() method.
-    return [];
+    try {
+      
+      $query = "SELECT * FROM USUARIOS";
+
+      $result = $this->db->query($query);
+
+      $usuarios_arr = $result->fetchAll(PDO::FETCH_ASSOC);
+
+      $lista_usuarios = array() ;
+
+      foreach ($usuarios_arr as $usuario) {
+
+        $usuario_obj = $this->getUsuario( $usuario );
+
+        array_push( $lista_usuarios, $usuario_obj );
+
+      }
+
+      return $lista_usuarios;
+
+    } catch (PDOException $e) {
+      // echo $e;
+      return [];
+    }
+
   }
 
   public function find_by_id(int $id): Usuario
   {
-    // TODO: Implement find_by_id() method.
-    return new Usuario();
+    try {
+      
+      $query = "SELECT *
+                FROM USUARIOS U WHERE U.USU_CODIGO = :USUARIO_ID";
+
+      $ps = $this->db->prepare($query) ;
+      $ps->bindParam( ':USUARIO_ID', $id ) ;
+      $ps->execute();
+
+      $usuario = $ps->fetch(PDO::FETCH_ASSOC);
+
+      return $this->getUsuario( $usuario );
+
+    } catch (PDOException $e) {
+      // echo $e;
+      return new Usuario();
+    }
+
+  }
+
+  /**
+   * Lista de los usuarios con rol VISITADOR
+   * @return \App\Models\Usuario
+   */
+  public function usuarios_visitadores(): array {
+    
+    try {
+      
+      $query = "SELECT *
+                FROM USUARIOS U WHERE U.USU_ROL_ID = 2";
+
+      $ps = $this->db->query($query) ;
+
+      $usuarios_arr = $ps->fetchAll(PDO::FETCH_ASSOC);
+
+      $lista_visitadores = array();
+
+      foreach ($usuarios_arr as $key => $usuario) {
+        
+        $usuario_obj = $this->getUsuario( $usuario );
+
+        array_push( $lista_visitadores, $usuario_obj );
+      }
+
+      return $lista_visitadores;
+
+
+    } catch (PDOException $e) {
+      // echo $e;
+      return new Usuario();
+    }
+
   }
 
   public function delete(int $id): bool
@@ -165,4 +241,26 @@ class UsuarioDao implements IUsuarioRepository
     // TODO: Implement delete() method.
     return false;
   }
+
+  private function getUsuario( $usuario ): Usuario {
+
+    $usuario_obj = new Usuario();
+
+    $usuario_obj->setCodigo( $usuario['USU_CODIGO'] );
+
+    // BUSCO EL ROL
+    $rol = $this->rolDao->find_by_id( $usuario['USU_ROL_ID'] );
+    $usuario_obj->setRol( $rol );
+
+    $usuario_obj->setUsername( $usuario['USU_USERNAME'] );
+    $usuario_obj->setEmail( $usuario['USU_EMAIL'] );
+    $usuario_obj->setClave( $usuario['USU_CLAVE'] );
+    $usuario_obj->setFecha_registro( $usuario['USU_FECHA_REGISTRO'] );
+    $usuario_obj->setFum( $usuario['USU_FUM'] );
+    $usuario_obj->setEstado( $usuario['USU_ESTADO'] );
+
+    return $usuario_obj;
+
+  }
+
 }

@@ -43,4 +43,10 @@ interface IVisitaRepository {
    */
   public function delete( int $id ): bool;
 
+  /**
+   * Actualiza el estado de la visita y agrega al visitador a la visita
+   * @return bool
+   */
+  public function asignar_visitador( int $visitador_id, int $codigo_visita ): bool;
+
 }

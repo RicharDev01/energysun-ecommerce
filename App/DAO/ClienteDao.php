@@ -55,13 +55,13 @@ class ClienteDao implements IClienteRepository
 
 		} catch (PDOException $e) {
 
-      // Revertir transacción en caso de error
-      $this->db->rollBack();
-      return false;
+			// Revertir transacción en caso de error
+			$this->db->rollBack();
+			return false;
 
-    } finally {
-      $ps = null;
-    }
+		} finally {
+			$ps = null;
+		}
 
 	}
 
@@ -79,8 +79,24 @@ class ClienteDao implements IClienteRepository
 
 	public function find_by_id(int $id): Cliente
 	{
-		// TODO: Implement find_by_id() method.
-		return new Cliente();
+		try {
+
+			$query = "SELECT *
+                FROM CLIENTES C WHERE C.CLI_CODIGO = :CLIENTE_ID";
+
+			$ps = $this->db->prepare($query);
+			$ps->bindParam(':CLIENTE_ID', $id);
+			$ps->execute();
+
+			$cliente = $ps->fetch(PDO::FETCH_ASSOC);
+
+			return $this->getCliente($cliente);
+
+		} catch (PDOException $e) {
+			// echo $e;
+			return new Usuario();
+		}
+
 	}
 
 	public function delete(int $id): bool
@@ -89,12 +105,13 @@ class ClienteDao implements IClienteRepository
 		return false;
 	}
 
-	public function obtener_total_clientes(): int {
+	public function obtener_total_clientes(): int
+	{
 
 		try {
-			
+
 			$query = "SELECT COUNT(*) AS TOTAL_CLIENTES FROM VW_DATOS_CLIENTES";
-			
+
 			$res = $this->db->query($query);
 
 			return (int) $res->fetch(PDO::FETCH_COLUMN);
@@ -105,37 +122,45 @@ class ClienteDao implements IClienteRepository
 
 	}
 
-	public function find_by_user_id(int $user_id): Cliente {
-		
+	public function find_by_user_id(int $user_id): Cliente
+	{
+
 		try {
-			
+
 			$query = "SELECT * FROM CLIENTES C WHERE C.CLI_USUARIO_ID = :USUARIO_ID";
 
-			$ps = $this->db->prepare($query );
-			$ps->bindParam( ':USUARIO_ID', $user_id );
+			$ps = $this->db->prepare($query);
+			$ps->bindParam(':USUARIO_ID', $user_id);
 			$ps->execute();
 
 			$cliente_arr = $ps->fetch(PDO::FETCH_ASSOC);
 
-			$cliente = new Cliente();
-
-			$cliente->setCodigoCliente( $cliente_arr['CLI_CODIGO'] );
-			$cliente->setCodigo( $cliente_arr['CLI_USUARIO_ID'] ); // codigo de usuario
-			$cliente->setFechaNac( $cliente_arr['CLI_FECHA_NAC'] );
-			$cliente->setPrimerNombre( $cliente_arr['CLI_PRIMER_NOM'] );
-			$cliente->setSegundoNombre( $cliente_arr['CLI_SEGUNDO_NOM'] );
-			$cliente->setPrimerApellido( $cliente_arr['CLI_PRIMER_APE'] );
-			$cliente->setSegundoNombre( $cliente_arr['CLI_SEGUNDO_APE'] );
-			$cliente->setTelefono( $cliente_arr['CLI_TELEFONO'] );
-			$cliente->setEstado( $cliente_arr['CLI_ESTADO'] );
-
-			return $cliente;
+			return $this->getCliente( $cliente_arr );
 
 
-		} catch (\Throwable $th) {
+		} catch (PDOException	$e) {
 			//throw $th;
 			return new Cliente();
 		}
+
+	}
+
+	private function getCliente( $cliente ): Cliente
+	{
+
+		$cliente_obj = new Cliente();
+
+		$cliente_obj->setCodigoCliente($cliente['CLI_CODIGO']);
+		$cliente_obj->setCodigo($cliente['CLI_USUARIO_ID']); // codigo de usuario
+		$cliente_obj->setFechaNac($cliente['CLI_FECHA_NAC']);
+		$cliente_obj->setPrimerNombre($cliente['CLI_PRIMER_NOM']);
+		$cliente_obj->setSegundoNombre($cliente['CLI_SEGUNDO_NOM']);
+		$cliente_obj->setPrimerApellido($cliente['CLI_PRIMER_APE']);
+		$cliente_obj->setSegundoNombre($cliente['CLI_SEGUNDO_APE']);
+		$cliente_obj->setTelefono($cliente['CLI_TELEFONO']);
+		$cliente_obj->setEstado($cliente['CLI_ESTADO']);
+
+		return $cliente_obj;
 
 	}
 

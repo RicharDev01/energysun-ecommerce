@@ -6,6 +6,12 @@ USE energysun_ecommerce;
 SELECT *
 FROM usuarios;
 
+-- usuario por su codigp
+SELECT *
+FROM usuarios U
+WHERE U.USU_CODIGO = 2;
+
+
 SELECT r.rol_nombre, u.*
 FROM USUARIOS u
        inner join roles r
@@ -84,7 +90,15 @@ FROM VW_DATOS_CLIENTES;
 
 -- ++++++++++++++ QUERYS DE VISITAS +++++++++++++
 SELECT *
-FROM VISITAS;
+FROM visitas;
+
+DESCRIBE visitas;
+
+SELECT *
+FROM visitas V 
+WHERE VIS_ESTADO = 'PENDIENTE ASIGNAR';
+
+
 
 -- +++++++++++ REPORTES DE FACTURA ++++++++++++
 SELECT c.CLI_CODIGO,
@@ -142,3 +156,4 @@ FROM ENVIOS;
 -- TOTAL DE LOS ENVIOS REALIZADOS EN ESTADO 'PENDIENTE'; 'EN RUTA'
 SELECT COUNT(*) AS TOTAL_DE_ENVIOS
 FROM ENVIOS WHERE ENV_ESTADO IN ('PENDIENTE', 'EN RUTA');
+

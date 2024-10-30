@@ -33,7 +33,7 @@ interface IEnvioRepository {
    * @param int $id
    * @return $envio el objeto encontrado
    */
-  public function find_by_id( int $id ): Envio | null;
+  public function find_by_id( int $id ): ?Envio ;
 
   /**
    * Firma del metodo para eliminar un registro de la base de datos, 

@@ -73,9 +73,11 @@ $formatter = new NumberFormatter( "en_US", NumberFormatter::CURRENCY );
 
 			<section class="card my-4">
 
-				<h2 class="mx-5">Top de productos</h2>
+				<div class="card-header">
+					<h2 class="mx-5">Top de productos</h2>
+				</div>
 
-				<div class="row gx-2 justify-content-center">
+				<div class="row gx-2 justify-content-center card-body">
 
 					<?php foreach ($top_sell_products as $prod): ?>
 

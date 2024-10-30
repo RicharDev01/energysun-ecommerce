@@ -34,8 +34,7 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
       <h3 class="">Electrificantes descuentos! Hasta un <span class="text-mark">35% OFF</span> en nuestros Kit solares
       </h3>
 
-      <!-- <a href="<?= Parameters::BASE_URL . '/productos/producto/filtro/kit-solares' ?>" class="btn btn-danger btn-lg">Comprar ahora</a> -->
-      <a href="#title-product" class="btn btn-danger btn-lg">Comprar ahora</a>
+      <a href="<?= Parameters::BASE_URL . '/productos/producto/filtro/1' ?>" class="btn btn-danger btn-lg">Comprar ahora</a>
     </article>
 
     <div class="banner__image">

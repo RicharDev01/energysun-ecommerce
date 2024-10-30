@@ -122,7 +122,7 @@ $producto_control = new ProductoController();
     </div>
 
     <div class="publicidad">
-      <a href="<?= Parameters::BASE_URL . '/productos/producto/lista' ?>" class="">
+      <a href="<?= Parameters::BASE_URL . '/productos/producto/filtro/1' ?>" class="">
 
         <img src="<?= Parameters::BASE_URL . '/resources/images/banner-lateral.png' ?>" alt="">
       </a>
