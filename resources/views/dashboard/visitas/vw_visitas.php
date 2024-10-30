@@ -79,7 +79,8 @@ require_once __DIR__ . "/../layouts/navbar.php";
               <section class="card-footer">
 
                 <?php if ($visita->getEstado() === 'PENDIENTE ASIGNAR'): ?>
-                  <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#asiganrVisitaModal<?= $visita->getCodigo() ?>">
+                  <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#asiganrVisitaModal<?= $visita->getCodigo() ?>">
                     Asignar visita
                   </a>
                 <?php else: ?>
@@ -101,7 +102,8 @@ require_once __DIR__ . "/../layouts/navbar.php";
               <article class="modal-content">
 
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="asiganrVisitaModalLabel">ASIGNAR LA VISITA #0<?= $visita->getCodigo() ?> </h1>
+                  <h1 class="modal-title fs-5" id="asiganrVisitaModalLabel">ASIGNAR LA VISITA
+                    #0<?= $visita->getCodigo() ?> </h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -143,20 +145,21 @@ require_once __DIR__ . "/../layouts/navbar.php";
 
       </div>
 
+      <!-- MENSAJES -->
+      <?php if (isset($_SESSION['asignado']) && $_SESSION['asignado']): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+          <strong>Asignado con exito!</strong> La visita se a asignado correctamente 
+
+        </div>
+      <?php endif; ?>
+
     </main>
 
   </div>
 
 </section>
-
-<?php if ( isset( $_SESSION['asignado'] ) && $_SESSION['asignado'] ) : ?>
-  <div
-  class="alert alert-success"
-  role="alert"
->
-  <strong> La visita a sido asiganda </strong> 
-</div> 
-<?php endif; ?>
 
 
 

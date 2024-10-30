@@ -21,7 +21,7 @@ require_once $header;
 
         <article class="hero__content">
           <h1 class="hero__title">
-            Paneles Solares <span class="text-mark">Diseñados</span> para usted
+            Paneles Solares <span class="text-mark">Diseñados</span> para ti
           </h1>
           <p class="hero__paragrah">
             En <span class="text-mark">EnergySun</span> , estamos comprometidos con brindarte soluciones energéticas
@@ -66,7 +66,7 @@ require_once $header;
   <section class="landing-offert container">
 
     <h3 class="offert__subtitle">Nuestra solucion</h3>
-    <h2 class="offert__title">Lo que le ofrecemos <br> a usted</h2>
+    <h2 class="offert__title">Lo que te ofrecemos <br> a ti</h2>
 
     <p class="offert__content">En <span class="text-mark">EnergySun</span>, te ofrecemos soluciones integrales de
       energía solar. Desde kits solares de alta calidad hasta servicios de instalación especializados, nuestro objetivo
