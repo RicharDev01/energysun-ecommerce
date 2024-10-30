@@ -67,7 +67,7 @@ $producto_control = new ProductoController();
 
         <?php if (isset($_SESSION['usuario'])): ?>
 
-          <a href="<?= Parameters::BASE_URL ?>/Payments/Paypal/comprar" class="btn btn-primary btn-lg">Comprar</a>
+          <a href="<?= Parameters::BASE_URL ?>/Payments/Payment/checkout/<?= $producto->getCodigo() ?>" class="btn btn-primary btn-lg">Comprar</a>
 
         <?php else: ?>
           <div class="message-alert alert-warning">

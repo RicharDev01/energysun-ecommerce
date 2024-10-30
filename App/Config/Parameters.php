@@ -13,4 +13,6 @@ class Parameters {
   // la accion por defecto
   const DEFAULT_ACTION = "index";
 
+  const IVA = 0.13; // el impuesto del 13%
+
 }

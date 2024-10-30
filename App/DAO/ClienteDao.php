@@ -156,7 +156,7 @@ class ClienteDao implements IClienteRepository
 		$cliente_obj->setPrimerNombre($cliente['CLI_PRIMER_NOM']);
 		$cliente_obj->setSegundoNombre($cliente['CLI_SEGUNDO_NOM']);
 		$cliente_obj->setPrimerApellido($cliente['CLI_PRIMER_APE']);
-		$cliente_obj->setSegundoNombre($cliente['CLI_SEGUNDO_APE']);
+		$cliente_obj->setSegundoApellido($cliente['CLI_SEGUNDO_APE']);
 		$cliente_obj->setTelefono($cliente['CLI_TELEFONO']);
 		$cliente_obj->setEstado($cliente['CLI_ESTADO']);
 

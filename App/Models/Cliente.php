@@ -144,5 +144,9 @@
 		{
 			$this->estado = $estado;
 		}
+
+		public function getFullName(): string {
+			return $this->primer_nombre . " " . $this->segundo_nombre . " " . $this->primer_apellido . " " . $this->segundo_apellido;
+		}
 		
 	}
