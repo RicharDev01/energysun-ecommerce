@@ -76,7 +76,7 @@ require_once __DIR__ . "/../layouts/navbar.php";
                 <p> <?= $visita->getDireccion() ?> </p>
               </section>
 
-              <section class="card-footer">
+              <section class="card-footer d-grid">
 
                 <?php if ($visita->getEstado() === 'PENDIENTE ASIGNAR'): ?>
                   <a href="#" class="btn btn-primary" data-bs-toggle="modal"

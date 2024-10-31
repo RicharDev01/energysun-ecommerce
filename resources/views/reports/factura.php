@@ -66,6 +66,7 @@ use App\Config\Parameters;
       padding: 10px;
       text-align: center;
       border: 1px solid #9EF37A;
+      
     }
 
     .invoice-details th {
@@ -85,40 +86,34 @@ use App\Config\Parameters;
       padding: 10px;
     }
   </style>
-
 </head>
 
 <body>
   <!-- Encabezado -->
   <div class="header">
-
     <table>
       <tr>
-
         <td class="info__cliente" style="width: 70%; text-align: left;">
           <h1>EnergySun</h1>
-          <p>Factura #: <?php echo '0001' ?></p>
-          <p>Fecha de Emisión: <?php echo '27/10/2024'; ?></p>
-          <p>Método de Pago: <?php echo 'medios electronicos'; ?></p>
+          <p>Factura #: <?php echo $datosFactura[0]['FAC_CODIGO']; ?></p>
+          <p>Fecha de Emisión: <?php echo $datosFactura[0]['FAC_FECHA_EMISION']; ?></p>
+          <p>Método de Pago: <?php echo $datosFactura[0]['FAC_METODO_PAGO']; ?></p>
         </td>
-
-        <td class="logotipo" style="width: 25%; text-align: right;" colspan="">
+        <td class="logotipo" style="width: 25%; text-align: right;">
           <img src="<?= Parameters::BASE_URL ?>/resources/images/logo-energysun-blanco.png" width="100" alt="">
           <h3>EnergySun</h3>
         </td>
       </tr>
     </table>
-
   </div>
 
   <!-- Información del Cliente -->
   <div class="customer-info">
     <h2>Datos del Cliente</h2>
-    <p><strong>Nombre:</strong>
-      <!-- <?= $cliente['CLI_PRIMER_NOM'] . ' ' . $cliente['CLI_SEGUNDO_NOM'] . ' ' . $cliente['CLI_PRIMER_APE'] . ' ' . $cliente['CLI_SEGUNDO_APE'] ?> -->
-      <?php echo 'Mario Ricardo Pineda'; ?>
+    <p><strong>Nombre:</strong> 
+      <?php echo $datosFactura[0]['CLI_PRIMER_NOM'] . ' ' . $datosFactura[0]['CLI_SEGUNDO_NOM'] . ' ' . $datosFactura[0]['CLI_PRIMER_APE'] . ' ' . $datosFactura[0]['CLI_SEGUNDO_APE']; ?>
     </p>
-    <p><strong>Teléfono:</strong> <?= '76021442' ?></p>
+    <p><strong>Teléfono:</strong> <?php echo $datosFactura[0]['CLI_TELEFONO']; ?></p>
   </div>
 
   <!-- Detalles de la Factura -->
@@ -134,47 +129,26 @@ use App\Config\Parameters;
       </tr>
     </thead>
     <tbody>
-      <!-- <?php foreach ($detalles as $detalle): ?>
-                <tr>
-                    <td><?= $detalle['PROD_NOMBRE'] ?></td>
-                    <td><?= $detalle['DET_CANTIDAD'] ?></td>
-                    <td>$<?= number_format($detalle['PROD_PRECIO'], 2) ?></td>
-                    <td><?= $detalle['DET_IMPUESTO'] ?>%</td>
-                    <td><?= $detalle['DET_DESCUENTOS'] ?>%</td>
-                    <td>$<?= number_format($detalle['DET_TOTAL'], 2) ?></td>
-                </tr>
-            <?php endforeach; ?> -->
-      <tr>
-        <td><?php echo 'Nombre del producto'; ?></td>
-        <td><?php echo 2 ?></td>
-        <td>$<?php number_format(2024.5, 2) ?></td>
-        <td><?php 13 ?>%</td>
-        <td><?= 25 ?>%</td>
-        <td>$<?= number_format(1256.5, 2) ?></td>
-      </tr>
-      <tr>
-        <td><?php echo 'Nombre del producto'; ?></td>
-        <td><?php echo 2 ?></td>
-        <td>$<?php number_format(2024.5, 2) ?></td>
-        <td><?php 13 ?>%</td>
-        <td><?= 25 ?>%</td>
-        <td>$<?= number_format(1256.5, 2) ?></td>
-      </tr>
-      <tr>
-        <td><?php echo 'Nombre del producto'; ?></td>
-        <td><?php echo 2 ?></td>
-        <td>$<?php number_format(2024.5, 2) ?></td>
-        <td><?php 13 ?>%</td>
-        <td><?= 25 ?>%</td>
-        <td>$<?= number_format(1256.5, 2) ?></td>
-      </tr>
+      <?php 
+      $total_factura = 0;
+      foreach ($datosFactura as $detalle): 
+          $total_factura += $detalle['DET_TOTAL'];
+      ?>
+        <tr>
+          <td><?php echo substr($detalle['PROD_NOMBRE'], 0, 45) . (strlen($detalle['PROD_NOMBRE']) > 20 ? '...' : ''); ?></td>
+          <td><?php echo $detalle['DET_CANTIDAD']; ?></td>
+          <td>$<?php echo number_format($detalle['PROD_PRECIO'], 2); ?></td>
+          <td><?php echo $detalle['DET_IMPUESTO']; ?>%</td>
+          <td><?php echo $detalle['DET_DESCUENTOS']; ?>%</td>
+          <td>$<?php echo number_format($detalle['DET_TOTAL'], 2); ?></td>
+        </tr>
+      <?php endforeach; ?>
     </tbody>
   </table>
 
   <!-- Total General -->
   <div class="total">
-    <!-- <strong>Total Factura:</strong> $<?= number_format($total_factura, 2) ?> -->
-    <strong>Total Factura:</strong> $<?= number_format(1256.5, 2) ?>
+    <strong>Total Factura:</strong> $<?php echo number_format($total_factura, 2); ?>
   </div>
 </body>
 

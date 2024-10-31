@@ -122,7 +122,7 @@ class ClienteDao implements IClienteRepository
 
 	}
 
-	public function find_by_user_id(int $user_id): Cliente
+	public function find_by_user_id(int $user_id)
 	{
 
 		try {
@@ -135,12 +135,18 @@ class ClienteDao implements IClienteRepository
 
 			$cliente_arr = $ps->fetch(PDO::FETCH_ASSOC);
 
-			return $this->getCliente( $cliente_arr );
+			if ( $cliente_arr ) {
+
+				return $this->getCliente( $cliente_arr );
+			} else {
+				return null;
+			}
+
 
 
 		} catch (PDOException	$e) {
 			//throw $th;
-			return new Cliente();
+			return null;
 		}
 
 	}

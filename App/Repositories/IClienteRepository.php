@@ -51,6 +51,6 @@ interface IClienteRepository {
 	public function obtener_total_clientes(): int ;
 
 
-	public function find_by_user_id( int $user_id ): Cliente;
+	public function find_by_user_id( int $user_id );
 		
 }
