@@ -32,33 +32,33 @@ use App\Config\Parameters;
       </a>
     </li>
 
-    <li>
+    <!-- <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/producto/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-box-seam"></i> Productos</span>
         <span class="badge text-bg-danger rounded-pill">-6</span>
       </a>
-    </li>
+    </li> -->
 
-    <li>
+    <!-- <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/categoria/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-tags"></i> Categorias</span>
-        <!--                       <span class="badge text-bg-primary rounded-pill">14</span>-->
+        <span class="badge text-bg-primary rounded-pill">14</span>
       </a>
-    </li>
+    </li> -->
 
     <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/visita/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-geo-alt"></i> Visitas</span>
-        <span class="badge text-bg-primary rounded-pill">7</span>
+        <!-- <span class="badge text-bg-primary rounded-pill">7</span> -->
       </a>
     </li>
 
-    <li>
+    <!-- <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/evaluacion/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">
         <span class=""> <i class="bi bi-list-check"></i> Evaluaciones</span>
         <span class="badge text-bg-primary rounded-pill">2</span>
       </a>
-    </li>
+    </li> -->
 
     <!-- <li>
       <a href="<?= Parameters::BASE_URL?>/dashboard/envio/vista" class="bg-green-dark list-group-item list-group-item-action d-flex justify-content-between">

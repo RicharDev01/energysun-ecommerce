@@ -13,7 +13,7 @@ use App\Config\Parameters;
   <h1>Gracias Por su compra</h1>
   <a href=" <?= Parameters::BASE_URL ?>/productos/producto/lista"> Ver más productos </a>
 
-<?php if( isset($_SESSION['success']) and $_SESSION['success'] ): ?>
+<?php if( isset( $exito )  and $exito ): ?>
 
 <a href="<?= Parameters::BASE_URL . '/reporteria/reportPrinter/generar/' . $facturaId ?>" class="btn btn-primary btn-lg" >Imprimir reporte</a>
 <?php endif; ?>

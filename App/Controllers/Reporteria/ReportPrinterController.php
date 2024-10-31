@@ -40,7 +40,7 @@ class ReportPrinterController
 
       $html2pdf->writeHTML($content);
 
-      $html2pdf->output("factura_$facturaId.pdf");
+      $html2pdf->output("factura.pdf");
 
     } catch (Html2PdfException $e) {
       $html2pdf->clean();

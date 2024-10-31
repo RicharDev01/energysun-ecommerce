@@ -139,10 +139,37 @@ class UsuarioDao implements IUsuarioRepository
     }
   }
 
-  public function save( Usuario $usuario): bool
+  public function save( Usuario $usuario ): bool
   {
-    // TODO: Implement save() method.
-    return false;
+    try {
+
+      $this->db->beginTransaction();
+
+      $rol_id = $usuario->getRol()->getCodigo();
+      $username = $usuario->getUsername();
+      $email = $usuario->getEmail();
+      $clave = $usuario->getClave();
+  
+      $query = "INSERT INTO USUARIOS( USU_ROL_ID, USU_USERNAME, USU_EMAIL, USU_CLAVE ) 
+                VALUES( :ROL_ID, :USERNAME, :EMAIL, :CLAVE )";
+  
+      $ps = $this->db->prepare( $query );
+      $ps->bindParam( ':ROL_ID', $rol_id );
+      $ps->bindParam( ':USERNAME', $username );
+      $ps->bindParam( ':EMAIL', $email );
+      $ps->bindParam( ':CLAVE', $clave );
+  
+      $ps->execute();
+
+      $this->db->commit();
+
+      return true;
+
+    } catch (PDOException $e) {
+      $this->db->rollBack();
+      return false;
+    }
+
   }
 
   public function edit( Usuario $usuario): bool
@@ -231,7 +258,7 @@ class UsuarioDao implements IUsuarioRepository
 
     } catch (PDOException $e) {
       // echo $e;
-      return new Usuario();
+      return [];
     }
 
   }
@@ -249,6 +276,9 @@ class UsuarioDao implements IUsuarioRepository
     $usuario_obj->setCodigo( $usuario['USU_CODIGO'] );
 
     // BUSCO EL ROL
+    /**
+     * @var Rol $rol
+     */
     $rol = $this->rolDao->find_by_id( $usuario['USU_ROL_ID'] );
     $usuario_obj->setRol( $rol );
 
