@@ -7,7 +7,7 @@ $header = __DIR__ . '/../layouts/header.php';
 
 require_once $header;
 
-date_default_timezone_set('America/Mexico_City');
+date_default_timezone_set('America/El_Salvador');
 $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
 ?>
@@ -36,8 +36,13 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
 				<div class="form__group">
 					<label for="fecha-factura" class="form__label"> Fecha: </label>
-					<input type="text" name="" id="fecha-factura" value="<?php echo $factura_recuperada->getFecha_emision(); ?>" class="form__input"
-						readonly style="font-size: 13px; width: 180px;">
+					<input
+						type="text"
+						name="fecha-factura"
+						id="fecha-factura" 
+						value="<?php echo ( new DateTime($factura_recuperada->getFecha_emision() ) )->format('d/m/Y H:i:s'); ?>"
+
+						class="form__input" readonly style="font-size: 13px; width: 180px;">
 				</div>
 			</div>
 
@@ -104,11 +109,12 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
 
 		<!-- RESUMEN DE LA COMPRA, IMPUESTO Y DESCUENTOS -->
-		<form method="post" action="<?=Parameters::BASE_URL?>/payments/payment/finalizar_compra" class="checkout__summary">
-			<h2 class="summary__title">Factura # 00<?= $factura_recuperada->getCodigo_factura(); ?>  </h2>
+		<form method="post" action="<?= Parameters::BASE_URL ?>/payments/payment/finalizar_compra"
+			class="checkout__summary">
+			<h2 class="summary__title">Factura # 00<?= $factura_recuperada->getCodigo_factura(); ?> </h2>
 
-			<input type="hidden" name="facturaId" id="facturaId" value="<?= $factura_recuperada->getCodigo_factura(); ?>" >
-			<input type="hidden" name="producto_id" id="producto_id" value="<?= $producto->getCodigo(); ?>" >
+			<input type="hidden" name="facturaId" id="facturaId" value="<?= $factura_recuperada->getCodigo_factura(); ?>">
+			<input type="hidden" name="producto_id" id="producto_id" value="<?= $producto->getCodigo(); ?>">
 
 			<table class="summary__table">
 
@@ -125,7 +131,7 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 						<td> 000<?php echo $producto->getCodigo(); ?> </td>
 						<td>
 							<input type="number" name="cantidad" class="form__input" style="width: 100px;" value="1" id="cantidad"
-								min="1" readonly>
+								min="1" required>
 						</td>
 					</tr>
 
@@ -143,23 +149,17 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 					<tr>
 						<td>Descuentos</td>
 						<td> <?= Helpers::decimal_a_porcentaje($producto->getDescuento()) ?> </td>
-						<input type="hidden" name="descuento" value="<?= $producto->getDescuento(); ?>" >
+						<input type="hidden" name="descuento" value="<?= $producto->getDescuento(); ?>">
 					</tr>
 
 					<tr>
 						<td>Total</td>
 						<td>
 							<strong style="font-size: 1.8rem; color: #9EF37A;" id="precio-total">
-								<?php
-								$precio_con_impuestos = $producto->getPrecio() * (1 + Parameters::IVA);
-								// Calcular el descuento sobre el precio con impuestos
-								$precio_total = $precio_con_impuestos - ($producto->getDescuento() * $precio_con_impuestos);
 
-								echo $formatter->formatCurrency($precio_total, 'USD');
-								?>
-
-							 	<input type="hidden" name="total" value="<?= $precio_total ?>" >
 							</strong>
+							<!-- <input type="hidden" name="total" value="<?= $precio_total ?>"> -->
+							<input type="hidden" name="total" id="total" value=""> <!-- Dinamicamente con JS, se agregara el total -->
 						</td>
 					</tr>
 
@@ -170,7 +170,9 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 						<td colspan="2">
 							<select name="medio-pago" id="medio-pago" class="form__input" required>
 								<option value="">Seleccione el medio de pago</option>
-								<option value="Medio Electrónico">Medio Electrónico</option>
+								<option value="Medio Electrónico" selected>Medio Electrónico</option>
+								<option value="PayPal">PayPal</option>
+								<option value="Wompi">Wompi</option>
 							</select>
 						</td>
 					</tr>
@@ -188,7 +190,55 @@ $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
 	</section>
 
+	<script>
+		addEventListener("DOMContentLoaded", () => {
+			const cantidadCompra = document.getElementById("cantidad")
+			const precioTotal = document.getElementById("precio-total")
+			const totalInput = document.getElementById('total')
 
+			// datos tomados de PHP
+			const precioProducto = <?= json_encode($producto->getPrecio()) ?>;
+			const IVA = <?= json_encode( 1 + Parameters::IVA ) ?>;
+			const valorDescuento = <?= json_encode( $producto->getDescuento() ) ?>;
+
+
+			if (precioTotal
+				&& cantidadCompra
+				&& parseInt(cantidadCompra.value) > 0
+				&& cantidadCompra.value !== '' && totalInput) {
+
+				// multiplicamos por la cantidad
+				let precioPorCantidad = cantidadCompra.value * precioProducto
+				// le agregamos los impuestos a la compra
+				let precioConImpuestos = (precioPorCantidad * IVA)
+				// aplicamos descuentos si aplican (seria el subtotal)
+				let subtotal = precioConImpuestos - (precioConImpuestos * valorDescuento)
+				precioTotal.textContent = `$${subtotal.toFixed(2)}`
+
+				totalInput.value = subtotal.toFixed(2)
+
+				// se repite el proceso, cuando la cantidad cambie
+				cantidadCompra.addEventListener("change", () => {
+
+					// multiplicamos por la cantidad
+					precioPorCantidad = cantidadCompra.value * precioProducto
+					// le agregamos los impuestos a la compra
+					precioConImpuestos = (precioPorCantidad * IVA)
+					// aplicamos descuentos si aplican (seria el subtotal)
+					subtotal = precioConImpuestos - (precioConImpuestos * valorDescuento)
+
+					precioTotal.textContent = `$${subtotal.toFixed(2)}`
+
+					totalInput.value = subtotal.toFixed(2)
+
+				})
+
+			} else {
+				alert("La cantidad no puede ser inferior a 0 ni vacia")
+			}
+		}) // fin de DOMContentrLoad
+
+	</script>
 
 </main>
 

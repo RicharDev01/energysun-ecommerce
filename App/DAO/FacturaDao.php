@@ -130,6 +130,30 @@ class FacturaDao implements IFacturaRepository
 
   }
 
+  public function actualizar_factura( int $codigo, string $metodo_pago ): bool {
+
+    try {
+      
+      $this->db->beginTransaction();
+
+      $query = "UPDATE FACTURAS SET FAC_METODO_PAGO = :METODO_PAGO WHERE FAC_CODIGO = :CODIGO";
+      $ps = $this->db->prepare( $query );
+      $ps->bindParam( ":METODO_PAGO", $metodo_pago );
+      $ps->bindParam( ":CODIGO", $codigo);
+      
+      $ps->execute();
+
+      $this->db->commit();
+
+      return true;
+
+    } catch (PDOException $e) {
+
+      return false;
+    }
+
+  }
+
   public function reporte_factura(int $codigoFactura) {
     try {
         // Preparar la consulta SQL

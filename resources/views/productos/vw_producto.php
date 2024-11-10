@@ -106,7 +106,7 @@ $producto_control = new ProductoController();
     <section class="product__status">
 
       <a href="#" class="product__category"> <span> Categoria: </span> <?= $producto->getCategoria()->getNombre() ?></a>
-      <p class="product__stock"> <span>En existemncias: </span> <span> <?= $producto->getStock() ?> </span> </p>
+      <p class="product__stock"> <span>En existencias: </span> <span> <?= $producto->getStock() ?> </span> </p>
 
     </section>
 
@@ -130,7 +130,7 @@ $producto_control = new ProductoController();
 
   </article>
 
-  <!-- // TODO: SERA INTERESANTE AGREGAR UN "PRODUCTOS RELACIONADOS" -->
+
   <h3 class="relacionado">Producto que pueden interesarte</h3>
 
   <section class="products-list">

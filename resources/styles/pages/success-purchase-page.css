@@ -1,0 +1,27 @@
+.success-purchase {
+  margin: 3rem 0;
+}
+
+.purchase__title {
+  font-size: 5rem;
+  font-family: var(--oxanium-b);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.purchase__image {
+  background-image: var(--l-gradient-button);
+  text-align: center;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+}
+
+.purchase__image img {
+  width: 50%;
+}
+
+.purchase__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -9,7 +9,10 @@ use App\Config\Parameters;
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="<?= Parameters::BASE_URL ?>/resources/images/logo-energysun-blanco.png" type="image/x-icon">
   <title>Reporte de Factura</title>
+
   <style>
     /* General */
     body {
@@ -96,7 +99,10 @@ use App\Config\Parameters;
         <td class="info__cliente" style="width: 70%; text-align: left;">
           <h1>EnergySun</h1>
           <p>Factura #: <?php echo $datosFactura[0]['FAC_CODIGO']; ?></p>
-          <p>Fecha de Emisión: <?php echo $datosFactura[0]['FAC_FECHA_EMISION']; ?></p>
+          <p>Fecha de Emisión: 
+            <?php 
+              echo ( new DateTime( $datosFactura[0]['FAC_FECHA_EMISION'] ) )->format("d/M/Y h:i:s a") ; 
+            ?></p>
           <p>Método de Pago: <?php echo $datosFactura[0]['FAC_METODO_PAGO']; ?></p>
         </td>
         <td class="logotipo" style="width: 25%; text-align: right;">
